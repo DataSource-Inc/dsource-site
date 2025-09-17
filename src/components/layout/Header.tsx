@@ -6,6 +6,11 @@ import Image from 'next/image'
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
+  
+  const handleMenuToggle = () => {
+    console.log('Menu toggle clicked, current state:', isMenuOpen)
+    setIsMenuOpen(!isMenuOpen)
+  }
 
   const navigation = [
     { name: 'Home', href: '/' },
@@ -31,16 +36,16 @@ export default function Header() {
               className="h-12 w-auto"
             />
           </Link>
-
           {/* Desktop Navigation */}
-          <div className="hidden lg-flex lg-items-center lg-space-x-8">
+          <div className="flex items-center space-x-8" style={{ display: 'flex' }}>
             {navigation.map((item) => (
               <Link
                 key={item.name}
                 href={item.href}
-                className={`text-gov-gray-700 hover-text-datasource-blue font-medium transition-colors ${
-                  item.name === 'ABIS' ? 'text-datasource-blue font-semibold' : ''
+                className={`text-gray-700 hover:text-blue-600 font-medium transition-colors ${
+                  item.name === 'ABIS' ? 'text-blue-600 font-semibold' : ''
                 }`}
+                style={{ color: '#374151' }}
               >
                 {item.name}
               </Link>
@@ -50,8 +55,8 @@ export default function Header() {
           {/* Mobile menu button */}
           <button
             type="button"
-            className="lg-hidden inline-flex items-center justify-center p-2 rounded-md text-gov-gray-700 hover-text-datasource-blue hover-bg-gov-gray-100 focus-outline-none focus-ring-2 focus-ring-inset focus-ring-datasource-blue"
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            className="lg:hidden inline-flex items-center justify-center p-2 rounded-md text-gray-700 hover:text-blue-600 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-600"
+            onClick={handleMenuToggle}
           >
             <span className="sr-only">Open main menu</span>
             {isMenuOpen ? (
@@ -68,14 +73,14 @@ export default function Header() {
 
         {/* Mobile menu */}
         {isMenuOpen && (
-          <div className="lg-hidden">
+          <div className="lg:hidden">
             <div className="px-2 pt-2 pb-3 space-y-1">
               {navigation.map((item) => (
                 <Link
                   key={item.name}
                   href={item.href}
-                  className={`block px-3 py-2 rounded-md text-base font-medium hover-text-datasource-blue hover-bg-gov-gray-50 transition-colors ${
-                    item.name === 'ABIS' ? 'text-datasource-blue font-semibold' : 'text-gov-gray-700'
+                  className={`block px-3 py-2 rounded-md text-base font-medium hover:text-blue-600 hover:bg-gray-50 transition-colors ${
+                    item.name === 'ABIS' ? 'text-blue-600 font-semibold' : 'text-gray-700'
                   }`}
                   onClick={() => setIsMenuOpen(false)}
                 >
