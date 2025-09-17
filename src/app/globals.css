@@ -385,28 +385,28 @@ p {
 .transition-shadow { transition-property: box-shadow; transition-duration: 0.2s; }
 .duration-300 { transition-duration: 0.3s; }
 
-/* Hover utilities */
-.hover-text-white:hover { color: white; }
-.hover-text-datasource-blue:hover { color: #0066CC; }
-.hover-text-datasource-dark-blue:hover { color: #004499; }
-.hover-bg-white:hover { background-color: white; }
-.hover-bg-gov-gray-50:hover { background-color: #F9FAFB; }
-.hover-bg-gov-gray-100:hover { background-color: #F3F4F6; }
-.hover-shadow-lg:hover { box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1); }
-.hover-underline:hover { text-decoration: underline; }
+/* Custom hover and focus utilities that don't conflict with Tailwind */
+.custom-hover-text-white:hover { color: white; }
+.custom-hover-text-datasource-blue:hover { color: #0066CC; }
+.custom-hover-text-datasource-dark-blue:hover { color: #004499; }
+.custom-hover-bg-white:hover { background-color: white; }
+.custom-hover-bg-gov-gray-50:hover { background-color: #F9FAFB; }
+.custom-hover-bg-gov-gray-100:hover { background-color: #F3F4F6; }
+.custom-hover-shadow-lg:hover { box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1); }
+.custom-hover-underline:hover { text-decoration: underline; }
 
-/* Focus utilities */
-.focus-outline-none:focus { outline: none; }
-.focus-ring-2:focus { box-shadow: 0 0 0 2px; }
-.focus-ring-inset:focus { box-shadow: inset 0 0 0 2px; }
-.focus-ring-datasource-blue:focus { box-shadow: 0 0 0 2px #0066CC; }
+/* Custom focus utilities that don't conflict with Tailwind */
+.custom-focus-outline-none:focus { outline: none; }
+.custom-focus-ring-2:focus { box-shadow: 0 0 0 2px; }
+.custom-focus-ring-inset:focus { box-shadow: inset 0 0 0 2px; }
+.custom-focus-ring-datasource-blue:focus { box-shadow: 0 0 0 2px #0066CC; }
 
 /* Other utilities */
 .antialiased { -webkit-font-smoothing: antialiased; }
 .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border-width: 0; }
 .grayscale { filter: grayscale(100%); }
 .grayscale-0 { filter: grayscale(0); }
-.hover-grayscale-0:hover { filter: grayscale(0); }
+.custom-hover-grayscale-0:hover { filter: grayscale(0); }
 .brightness-0 { filter: brightness(0); }
 .invert { filter: invert(1); }
 .bg-gradient-to-b { background-image: linear-gradient(to bottom, var(--tw-gradient-stops)); }
