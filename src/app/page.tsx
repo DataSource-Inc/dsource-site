@@ -34,7 +34,7 @@ export default function Home() {
             </p>
             <h3 className="text-2xl font-semibold text-datasource-blue mb-4">Why Choose ABIS?</h3>
             <p className="text-lg text-gov-gray-700 mb-8">
-              ABIS architecture includes many dynamic and user-defined features that provide adaptability to change and put the customer in charge of their own implementation. Together, these aspects of ABIS design, along with the breadth and depth of functionality included in ABIS based on DataSource's 25 years of subject matter expertise in Personnel Security, make ABIS a superior choice for Federal Agencies.
+              ABIS architecture includes many dynamic and user-defined features that provide adaptability to change and put the customer in charge of their own implementation. Together, these aspects of ABIS design, along with the breadth and depth of functionality included in ABIS based on DataSource&rsquo;s 25 years of subject matter expertise in Personnel Security, make ABIS a superior choice for Federal Agencies.
             </p>
             <Link href="/abis" className="btn-primary inline-block">
               Learn More About ABIS

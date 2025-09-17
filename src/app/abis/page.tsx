@@ -207,7 +207,7 @@ export default function ABISPage() {
                   What is a typical timeline for implementing ABIS?
                 </h3>
                 <p className="text-gov-gray-700">
-                  Timeline for implementing ABIS largely depends on the data migration and the interfaces desired. There is generally very little, if any, customization (additional coding) required outside of new interfaces as ABIS already meets most customer requirements "out of the box."
+                  Timeline for implementing ABIS largely depends on the data migration and the interfaces desired. There is generally very little, if any, customization (additional coding) required outside of new interfaces as ABIS already meets most customer requirements &ldquo;out of the box.&rdquo;
                 </p>
               </div>
 
@@ -257,7 +257,7 @@ export default function ABISPage() {
               <div className="card">
                 <h3 className="text-xl font-semibold text-datasource-blue mb-3">Competitive Pricing</h3>
                 <p className="text-gov-gray-700">
-                  DataSource's subject matter knowledge and maturity of ABIS system enables us to provide a high-quality end product on a competitive basis.
+                  DataSource&rsquo;s subject matter knowledge and maturity of ABIS system enables us to provide a high-quality end product on a competitive basis.
                 </p>
               </div>
             </div>

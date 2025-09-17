@@ -46,7 +46,7 @@ export default function ClientsPage() {
               <strong>Contract Number:</strong> GS-35F-410GA
             </p>
             <p className="text-gov-gray-700">
-              DataSource's GSA contract provides federal agencies with streamlined procurement options for our ABIS system and related services.
+              DataSource&rsquo;s GSA contract provides federal agencies with streamlined procurement options for our ABIS system and related services.
             </p>
           </div>
         </div>
