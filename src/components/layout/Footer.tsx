@@ -6,7 +6,7 @@ const NAV_LINKS = [
   { href: "/why-abis", label: "Why ABIS" },
   { href: "/customers", label: "Customers" },
   { href: "/contact", label: "Contact Us" },
-  { href: "/privacy", label: "Privacy Policy" },
+  { href: "/privacy-policy", label: "Privacy Policy" },
 ] as const;
 
 export default function Footer() {
@@ -85,7 +85,7 @@ export default function Footer() {
               Contact Us
             </Link>
             <Link
-              href="/privacy"
+              href="/privacy-policy"
               className="text-body-1 leading-[1.4] text-gray-100 hover:text-primary-80"
             >
               Privacy Policy
