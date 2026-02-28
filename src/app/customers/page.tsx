@@ -220,7 +220,7 @@ export default function CustomersPage() {
 
       {/* Supporting Our Customers Section */}
       <div className="mx-auto max-w-[1200px] px-10 max-md:px-4 pt-[150px] max-md:pt-20 pb-20 max-md:pb-14">
-        <h2 className="text-h2 text-primary-80 tracking-[-1px] max-md:text-h3">
+        <h2 className="text-h2 text-primary-80 tracking-[-1px] max-md:text-[32px] max-md:leading-[1.25] max-md:tracking-[-1px]">
           Supporting Our Customers
         </h2>
 
@@ -231,13 +231,19 @@ export default function CustomersPage() {
             // Determine border classes based on position in 2x2 grid
             const isLeft = index % 2 === 0;
             const isTop = index < 2;
+            const isLast = index === supportItems.length - 1;
             const borderClasses = [
+              // Desktop: top row gets bottom padding, bottom row gets top padding
               isTop ? "pb-10" : "pt-10",
               isLeft ? "pr-10 max-md:pr-0" : "pl-10 max-md:pl-0",
+              // Desktop: top row border-bottom
               isTop ? "border-b border-gray-40" : "",
+              // Desktop: left column border-right
               isLeft ? "border-r max-md:border-r-0 border-gray-40" : "",
-              // On mobile, add bottom border for all except last
-              !isTop && isLeft ? "max-md:border-b max-md:border-gray-40 max-md:pb-10" : "",
+              // Mobile: all items except last get bottom border + padding
+              !isLast ? "max-md:border-b max-md:border-gray-40 max-md:pb-10" : "",
+              // Mobile: all items except first get top padding
+              index > 0 ? "max-md:pt-10" : "",
             ].join(" ");
 
             return (

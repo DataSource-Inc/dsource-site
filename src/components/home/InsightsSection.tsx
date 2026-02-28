@@ -33,7 +33,7 @@ export default function InsightsSection() {
         {/* Top area: Title + Quote side-by-side on desktop */}
         <div className="flex items-start justify-between gap-5 max-md:flex-col max-md:gap-10">
           {/* Left: Section title */}
-          <h2 className="text-h2 text-primary-80 max-w-[590px] shrink-0 max-md:text-[32px] max-md:leading-[1.25] max-md:max-w-full">
+          <h2 className="text-h2 text-primary-80 max-w-[590px] shrink-0 max-md:text-[32px] max-md:leading-[1.25] max-md:tracking-[-1px] max-md:max-w-full">
             Personnel Security{" "}
             <br className="max-md:hidden" />
             Insights
@@ -97,6 +97,7 @@ export default function InsightsSection() {
               title={insight.title}
               slug={insight.slug}
               icon={insight.icon}
+              horizontalOnMobile
             />
           ))}
         </div>

@@ -98,7 +98,7 @@ export default async function InsightPage({
 
       {/* More Personnel Security Insights */}
       <div className="mx-auto max-w-[1200px] px-10 max-md:px-4 pb-20 max-md:pb-14">
-        <h2 className="text-h2 text-primary-80 tracking-[-1px] max-md:text-[28px] max-md:leading-[1.25]">
+        <h2 className="text-h2 text-primary-80 tracking-[-1px] max-md:text-[28px] max-md:leading-[1.25] max-md:tracking-[-0.5px]">
           More Personnel Security Insights:
         </h2>
 

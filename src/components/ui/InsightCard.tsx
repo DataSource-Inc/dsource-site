@@ -5,16 +5,25 @@ interface InsightCardProps {
   title: string;
   slug: string;
   icon: string;
+  /** When true, the card renders horizontally (icon left, text right) on mobile */
+  horizontalOnMobile?: boolean;
 }
 
-export default function InsightCard({ title, slug, icon }: InsightCardProps) {
+export default function InsightCard({
+  title,
+  slug,
+  icon,
+  horizontalOnMobile = false,
+}: InsightCardProps) {
   return (
     <Link
       href={`/insights/${slug}`}
-      className="group block rounded-2xl border border-primary-10 bg-white p-6 transition-shadow hover:shadow-md"
+      className={`group block rounded-2xl border border-primary-10 bg-white p-6 transition-shadow hover:shadow-md ${
+        horizontalOnMobile ? "max-md:flex max-md:items-center max-md:gap-4" : ""
+      }`}
     >
       {/* Icon / Image */}
-      <div className="mb-4">
+      <div className={`${horizontalOnMobile ? "mb-4 max-md:mb-0 max-md:shrink-0" : "mb-4"}`}>
         <Image src={icon} alt="" width={48} height={48} />
       </div>
 

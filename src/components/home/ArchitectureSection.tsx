@@ -11,7 +11,7 @@ export default function ArchitectureSection() {
         </SectionHeading>
 
         {/* Two-column layout (reversed from Section 2: video left, text right) */}
-        <div className="mt-10 flex gap-10 max-md:flex-col max-md:gap-8">
+        <div className="mt-10 flex gap-10 max-md:flex-col-reverse max-md:gap-8">
           {/* Left: Video embed */}
           <div className="w-[773px] shrink-0 max-md:w-full">
             <VideoEmbed
