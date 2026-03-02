@@ -6,23 +6,23 @@ const INSIGHTS = [
     title:
       "Breaking down how Trusted Workforce will improve productivity for Personnel Security offices",
     slug: "trusted-workforce-productivity",
-    icon: "/insights/icon-1.png",
+    icon: "/insights/icon-1.svg",
   },
   {
     title:
       "How Personnel Security is at the hub of key operational processes for Federal Agencies",
     slug: "personnel-security-hub",
-    icon: "/insights/icon-2.png",
+    icon: "/insights/icon-2.svg",
   },
   {
     title: "The benefits of Integration",
     slug: "benefits-of-integration",
-    icon: "/insights/icon-3.png",
+    icon: "/insights/icon-3.svg",
   },
   {
     title: "How Personnel Security is always evolving",
     slug: "personnel-security-evolving",
-    icon: "/insights/icon-4.png",
+    icon: "/insights/icon-4.svg",
   },
 ] as const;
 

@@ -1,4 +1,3 @@
-import Image from "next/image";
 import Link from "next/link";
 
 interface InsightCardProps {
@@ -30,7 +29,8 @@ export default function InsightCard({
             : "mb-12"
         }`}
       >
-        <Image src={icon} alt="" width={144} height={144} className="h-full w-auto" />
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src={icon} alt="" className="h-full w-auto" />
       </div>
 
       {/* Title */}
