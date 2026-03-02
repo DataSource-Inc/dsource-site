@@ -28,7 +28,7 @@ const INSIGHTS = [
 
 export default function InsightsSection() {
   return (
-    <section className="bg-white py-24 max-md:py-16">
+    <section className="bg-light py-24 max-md:py-16">
       <div className="mx-auto max-w-[1200px] px-10 max-md:px-4">
         {/* Top area: Title + Quote side-by-side on desktop */}
         <div className="flex items-start justify-between gap-5 max-md:flex-col max-md:gap-10">

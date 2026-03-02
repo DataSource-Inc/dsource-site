@@ -4,16 +4,30 @@ import Button from "@/components/ui/Button";
 export default function HeroSection() {
   return (
     <section className="relative bg-light overflow-hidden">
-      {/* Decorative world map watermark - left side */}
+      {/* Decorative dotted world map - left side */}
       <div
-        className="absolute left-[-30%] top-[40%] w-[55%] h-[50%] opacity-[0.08] bg-[url('/hero.jpg')] bg-contain bg-no-repeat bg-center pointer-events-none max-md:hidden"
+        className="absolute left-[-26%] top-[35%] w-[50%] h-[55%] opacity-60 pointer-events-none max-md:hidden"
         aria-hidden="true"
-      />
-      {/* Decorative world map watermark - right side (mirrored) */}
+      >
+        <Image
+          src="/hero-dots.png"
+          alt=""
+          fill
+          className="object-contain"
+        />
+      </div>
+      {/* Decorative dotted world map - right side (mirrored) */}
       <div
-        className="absolute right-[-20%] top-[40%] w-[55%] h-[50%] opacity-[0.08] bg-[url('/hero.jpg')] bg-contain bg-no-repeat bg-center pointer-events-none scale-x-[-1] max-md:hidden"
+        className="absolute right-[-20%] top-[35%] w-[50%] h-[55%] opacity-60 pointer-events-none scale-x-[-1] max-md:hidden"
         aria-hidden="true"
-      />
+      >
+        <Image
+          src="/hero-dots.png"
+          alt=""
+          fill
+          className="object-contain"
+        />
+      </div>
 
       <div className="mx-auto max-w-[1200px] px-10 max-md:px-4 pt-14 pb-20 max-md:pt-10 max-md:pb-14">
         <div className="flex flex-col items-center text-center max-w-[987px] mx-auto gap-[52px] max-md:gap-10">
