@@ -3,7 +3,7 @@ import VideoEmbed from "@/components/ui/VideoEmbed";
 
 export default function ArchitectureSection() {
   return (
-    <section className="bg-light py-24 max-md:py-16">
+    <section className=" py-24 max-md:py-16">
       <div className="mx-auto max-w-[1200px] px-10 max-md:px-4">
         {/* Section heading */}
         <SectionHeading>

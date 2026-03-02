@@ -17,7 +17,7 @@ export default function InsightCard({
   return (
     <Link
       href={`/insights/${slug}`}
-      className={`group block bg-beige px-8 py-10 transition-shadow hover:shadow-md ${
+      className={`group block bg-beige px-8 py-10 transition-all duration-300 hover:bg-primary-80 ${
         horizontalOnMobile ? "max-md:flex max-md:items-center max-md:gap-4" : ""
       }`}
     >
@@ -30,11 +30,15 @@ export default function InsightCard({
         }`}
       >
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src={icon} alt="" className="h-full w-auto" />
+        <img
+          src={icon}
+          alt=""
+          className="h-full w-auto transition-all duration-300 group-hover:brightness-0 group-hover:invert"
+        />
       </div>
 
       {/* Title */}
-      <h3 className="text-big text-primary-80 transition-colors group-hover:underline">
+      <h3 className="text-big text-primary-80 transition-colors duration-300 group-hover:text-white">
         {title}
       </h3>
     </Link>

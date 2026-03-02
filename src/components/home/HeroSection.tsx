@@ -3,7 +3,7 @@ import Button from "@/components/ui/Button";
 
 export default function HeroSection() {
   return (
-    <section className="relative bg-light overflow-hidden">
+    <section className="relative  overflow-hidden">
       {/* Decorative dotted world map - left side */}
       <div
         className="absolute left-[-26%] top-[35%] w-[50%] h-[55%] opacity-60 pointer-events-none max-md:hidden"
