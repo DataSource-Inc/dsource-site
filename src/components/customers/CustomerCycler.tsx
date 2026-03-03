@@ -45,7 +45,7 @@ export default function CustomerCycler({ customers }: CustomerCyclerProps) {
   return (
     <div className="w-full h-[720px] max-md:h-auto max-md:min-h-[500px] flex max-md:flex-col">
       {/* Left half - Customer name, logo, navigation */}
-      <div className="w-1/2 max-md:w-full max-md:min-h-[350px] bg-beige relative flex flex-col justify-between p-10 max-md:p-6">
+      <div className="w-1/2 max-md:w-full max-md:min-h-[350px]  relative flex flex-col justify-between p-10 max-md:p-6">
         {/* Customer name */}
         <h1 className="text-h3 max-md:text-h4 text-primary-80 tracking-[-1px] max-w-[440px]">
           {current.name} ({current.abbreviation})
@@ -63,8 +63,8 @@ export default function CustomerCycler({ customers }: CustomerCyclerProps) {
                 <Image
                   src={customer.logo}
                   alt={`${customer.name} logo`}
-                  width={280}
-                  height={280}
+                  width={380}
+                  height={380}
                   className="object-contain max-w-full max-h-full"
                 />
               </div>
@@ -120,7 +120,7 @@ export default function CustomerCycler({ customers }: CustomerCyclerProps) {
       </div>
 
       {/* Right half - About section */}
-      <div className="w-1/2 max-md:w-full bg-light p-10 max-md:p-6 overflow-y-auto">
+      <div className="w-1/2 max-md:w-full bg-beige p-10 max-md:p-6 overflow-y-auto">
         <div className="relative">
           {customers.map((customer, index) => (
             <div

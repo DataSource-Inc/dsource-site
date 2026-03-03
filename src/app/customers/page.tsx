@@ -15,13 +15,15 @@ const supportItems = [
       'We meet periodically with our customers to share ideas and solutions, to identify and plan new capabilities, how some tasks can be automated, and of course, to plan for Trusted Workforce initiatives. We have found these user sessions ("roundtables") to be helpful and to contribute to the value ABIS provides.',
   },
   {
-    icon: "/icons/expertise.svg",
+    // icon: "/icons/expertise.svg",
+    icon: "/icons/deep-expertise-in-security2.svg",
     title: "Deep Expertise in Personnel Security",
     description:
       "We stay aware of what is going on in Personnel Security. It is a domain that seems to always be changing. Personnel Security is also integrated in so many business functions that opportunities for new automated interfaces often appear. Our team is knowledgeable enough to recognize those opportunities and make good suggestions.",
   },
   {
-    icon: "/icons/reporting.svg",
+    // icon: "/icons/reporting.svg",
+    icon: "/icons/transparent-progress-reporting2.svg",
     title: "Transparent Progress Reporting",
     description:
       "We provide transparency into our status and progress for customer requested enhancements so that they can be aware of what we are working on and what stage we're in. This helps Personnel Security planning efforts and enables them to provide accurate reporting to their management.",
