@@ -42,25 +42,14 @@ export default function InsightsSection() {
           {/* Right: Quote block */}
           <div className="flex flex-col gap-7 pt-5 max-w-[590px] max-md:pt-0 max-md:max-w-full">
             {/* Quote icon */}
-            <svg
-              width="40"
-              height="40"
-              viewBox="0 0 40 40"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
+            <Image
+              src="/icons/quote.svg"
+              alt=""
+              width={38}
+              height={35}
               aria-hidden="true"
-              className="text-primary-80 shrink-0"
-            >
-              <text
-                x="1"
-                y="35"
-                fontSize="48"
-                fontFamily="serif"
-                fill="currentColor"
-              >
-                &ldquo;
-              </text>
-            </svg>
+              className="shrink-0"
+            />
 
             {/* Quote text */}
             <p className="text-big text-primary-80 leading-[1.4]">
@@ -75,8 +64,7 @@ export default function InsightsSection() {
               {/* Avatar placeholder */}
               <div className="h-10 w-10 shrink-0 rounded-full bg-gray-40 overflow-hidden">
                 <Image
-                  src="/about-us.jpg"
-                  alt="Pamela Hopkins"
+                  src="/pam.png"               alt="Pamela Hopkins"
                   width={40}
                   height={40}
                   className="h-full w-full object-cover"

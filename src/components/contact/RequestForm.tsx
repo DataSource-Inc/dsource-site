@@ -1,13 +1,33 @@
 "use client";
 
-import { useState } from "react";
+import { useActionState, useState } from "react";
 import Button from "@/components/ui/Button";
+import {
+  submitContactForm,
+  type ContactFormState,
+} from "@/app/contact/actions";
 
 const TABS = ["Demo", "More Information", "White Paper"] as const;
 type Tab = (typeof TABS)[number];
 
 export default function RequestForm() {
-  const [activeTab, setActiveTab] = useState<Tab>("Demo");
+  const [selectedTabs, setSelectedTabs] = useState<Set<Tab>>(new Set(["Demo"]));
+  const [state, formAction, isPending] = useActionState<
+    ContactFormState,
+    FormData
+  >(submitContactForm, null);
+
+  const toggleTab = (tab: Tab) => {
+    setSelectedTabs((prev) => {
+      const next = new Set(prev);
+      if (next.has(tab)) {
+        next.delete(tab);
+      } else {
+        next.add(tab);
+      }
+      return next;
+    });
+  };
 
   return (
     <div className="bg-beige flex flex-col gap-6 p-6">
@@ -20,12 +40,12 @@ export default function RequestForm() {
         {/* Tab bar */}
         <div className="flex gap-3 flex-wrap">
           {TABS.map((tab) => {
-            const isActive = tab === activeTab;
+            const isActive = selectedTabs.has(tab);
             return (
               <button
                 key={tab}
                 type="button"
-                onClick={() => setActiveTab(tab)}
+                onClick={() => toggleTab(tab)}
                 className={`flex items-center gap-2 h-[44px] px-5 text-body-1 leading-[1.4] transition-colors ${
                   isActive
                     ? "bg-primary-80 text-white"
@@ -55,10 +75,12 @@ export default function RequestForm() {
       </div>
 
       {/* Form fields */}
-      <form
-        onSubmit={(e) => e.preventDefault()}
-        className="flex flex-col gap-5"
-      >
+      <form action={formAction} className="flex flex-col gap-5">
+        {/* Hidden inputs for selected request types */}
+        {Array.from(selectedTabs).map((tab) => (
+          <input key={tab} type="hidden" name="requestTypes" value={tab} />
+        ))}
+
         {/* Agency/Bureau Name */}
         <div className="flex flex-col gap-3">
           <label className="text-body-1 leading-[1.4] text-gray-100">
@@ -66,6 +88,8 @@ export default function RequestForm() {
           </label>
           <input
             type="text"
+            name="agency"
+            required
             placeholder="Agency/Bureau Name"
             className="h-[52px] border border-gray-40 px-4 py-1 text-body-1 leading-[1.4] text-gray-100 placeholder:text-gray-60 focus:outline-none focus:ring-2 focus:ring-primary-80"
           />
@@ -78,6 +102,8 @@ export default function RequestForm() {
           </label>
           <input
             type="text"
+            name="name"
+            required
             placeholder="Your Full Name and Title"
             className="h-[52px] border border-gray-40 px-4 py-1 text-body-1 leading-[1.4] text-gray-100 placeholder:text-gray-60 focus:outline-none focus:ring-2 focus:ring-primary-80"
           />
@@ -90,6 +116,8 @@ export default function RequestForm() {
           </label>
           <input
             type="email"
+            name="email"
+            required
             placeholder="Your Email Address"
             className="h-[52px] border border-gray-40 px-4 py-1 text-body-1 leading-[1.4] text-gray-100 placeholder:text-gray-60 focus:outline-none focus:ring-2 focus:ring-primary-80"
           />
@@ -104,17 +132,30 @@ export default function RequestForm() {
             <span className="text-gray-60">(Optional)</span>
           </div>
           <textarea
+            name="comments"
             placeholder="Any Comments or Questions?"
             className="h-[120px] border border-gray-40 px-4 py-4 text-body-1 leading-[1.4] text-gray-100 placeholder:text-gray-60 resize-none focus:outline-none focus:ring-2 focus:ring-primary-80"
           />
         </div>
 
+        {/* Status message */}
+        {state && (
+          <p
+            className={`text-body-1 ${
+              state.success ? "text-green-700" : "text-red-600"
+            }`}
+          >
+            {state.message}
+          </p>
+        )}
+
         {/* Submit Button */}
         <Button
-          onClick={() => {}}
+          type="submit"
+          disabled={isPending}
           className="w-full justify-between rounded-none h-[56px]"
         >
-          Submit Request
+          {isPending ? "Submitting..." : "Submit Request"}
         </Button>
       </form>
     </div>
