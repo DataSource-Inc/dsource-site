@@ -24,7 +24,7 @@ export default function TrustedWorkforceSection() {
           {/* Right: Video embed */}
           <div className="w-[773px] shrink-0 max-md:w-full">
             <VideoEmbed
-              videoId="eAN6wayu3O8"
+              videoId="y9Tv6bhQNhk"
               title="How ABIS Supports Trusted Workforce"
             />
           </div>
