@@ -37,7 +37,7 @@ export default function Footer() {
 
           {/* LinkedIn Icon */}
           <a
-            href="https://www.linkedin.com/company/datasource-incorporated"
+            href="https://www.linkedin.com/company/datasourceinc"
             target="_blank"
             rel="noopener noreferrer"
             aria-label="DataSource on LinkedIn"
