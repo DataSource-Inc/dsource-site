@@ -1,5 +1,21 @@
 import StatCard from "@/components/ui/StatCard";
 
+const stats = [
+  {
+    number: "25+",
+    description:
+      "Years of Subject Matter Expertise in Federal Agency Personnel Security",
+    iconSrc: "/shield-globe.svg",
+    iconAlt: "Shield with globe",
+  },
+  {
+    number: "31+",
+    description: "Years of Software Development Experience",
+    iconSrc: "/gears.svg",
+    iconAlt: "Interlocking gears",
+  },
+];
+
 const reasons = [
   {
     number: "1",
@@ -29,111 +45,6 @@ const reasons = [
   },
 ];
 
-function GlobeIcon() {
-  return (
-    <svg
-      width="113"
-      height="130"
-      viewBox="0 0 113 130"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      className="w-[113px] h-[130px] max-md:w-[59px] max-md:h-[68px]"
-      aria-hidden="true"
-    >
-      <circle
-        cx="56.5"
-        cy="65"
-        r="50"
-        stroke="#084C79"
-        strokeWidth="2.5"
-        fill="none"
-      />
-      <ellipse
-        cx="56.5"
-        cy="65"
-        rx="25"
-        ry="50"
-        stroke="#084C79"
-        strokeWidth="2.5"
-        fill="none"
-      />
-      <line
-        x1="6.5"
-        y1="45"
-        x2="106.5"
-        y2="45"
-        stroke="#084C79"
-        strokeWidth="2.5"
-      />
-      <line
-        x1="6.5"
-        y1="85"
-        x2="106.5"
-        y2="85"
-        stroke="#084C79"
-        strokeWidth="2.5"
-      />
-      <line
-        x1="56.5"
-        y1="15"
-        x2="56.5"
-        y2="115"
-        stroke="#084C79"
-        strokeWidth="2.5"
-      />
-    </svg>
-  );
-}
-
-function CodeIcon() {
-  return (
-    <svg
-      width="140"
-      height="143"
-      viewBox="0 0 140 143"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      className="w-[140px] h-[143px] max-md:w-[66px] max-md:h-[68px]"
-      aria-hidden="true"
-    >
-      {/* Gear outer */}
-      <path
-        d="M70 10 L78 2 L86 10 L92 6 L96 16 L104 14 L104 24 L112 26 L108 34 L116 40 L110 46 L116 54 L108 56 L112 66 L104 66 L104 76 L96 74 L92 84 L86 80 L78 88 L70 80 L62 88 L54 80 L48 84 L44 74 L36 76 L36 66 L28 66 L32 56 L24 54 L30 46 L24 40 L32 34 L28 26 L36 24 L36 14 L44 16 L48 6 L54 10 L62 2 Z"
-        stroke="#084C79"
-        strokeWidth="2.5"
-        fill="none"
-      />
-      <circle cx="70" cy="45" r="18" stroke="#084C79" strokeWidth="2.5" fill="none" />
-      {/* Code brackets */}
-      <path
-        d="M45 100 L30 115 L45 130"
-        stroke="#084C79"
-        strokeWidth="3"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        fill="none"
-      />
-      <path
-        d="M95 100 L110 115 L95 130"
-        stroke="#084C79"
-        strokeWidth="3"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        fill="none"
-      />
-      <line
-        x1="78"
-        y1="98"
-        x2="62"
-        y2="132"
-        stroke="#084C79"
-        strokeWidth="3"
-        strokeLinecap="round"
-      />
-    </svg>
-  );
-}
-
 export default function WhyAbisPage() {
   return (
     <section className="bg-light">
@@ -145,16 +56,9 @@ export default function WhyAbisPage() {
 
         {/* Stats Row */}
         <div className="mt-16 max-md:mt-10 grid grid-cols-2 max-md:grid-cols-1 gap-3">
-          <StatCard
-            number="25+"
-            description="Years of Subject Matter Expertise in Federal Agency Personnel Security"
-            icon={<GlobeIcon />}
-          />
-          <StatCard
-            number="31+"
-            description="Years of Software Development Experience"
-            icon={<CodeIcon />}
-          />
+          {stats.map((stat) => (
+            <StatCard key={stat.number} {...stat} />
+          ))}
         </div>
 
         {/* Five Reasons Section */}
