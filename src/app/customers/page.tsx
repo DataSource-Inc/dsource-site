@@ -28,190 +28,6 @@ const supportItems = [
   },
 ];
 
-function PartnershipIcon() {
-  return (
-    <svg
-      width="136"
-      height="136"
-      viewBox="0 0 136 136"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      className="size-[136px] max-md:size-[80px]"
-      aria-hidden="true"
-    >
-      {/* Two people at table */}
-      <rect
-        x="20"
-        y="80"
-        width="96"
-        height="4"
-        rx="2"
-        stroke="#084C79"
-        strokeWidth="2"
-      />
-      <circle cx="45" cy="50" r="12" stroke="#084C79" strokeWidth="2" fill="none" />
-      <path
-        d="M30 80 C30 65 60 65 60 80"
-        stroke="#084C79"
-        strokeWidth="2"
-        fill="none"
-      />
-      <circle cx="91" cy="50" r="12" stroke="#084C79" strokeWidth="2" fill="none" />
-      <path
-        d="M76 80 C76 65 106 65 106 80"
-        stroke="#084C79"
-        strokeWidth="2"
-        fill="none"
-      />
-      <rect
-        x="58"
-        y="80"
-        width="4"
-        height="30"
-        stroke="#084C79"
-        strokeWidth="2"
-        fill="none"
-      />
-      <rect
-        x="74"
-        y="80"
-        width="4"
-        height="30"
-        stroke="#084C79"
-        strokeWidth="2"
-        fill="none"
-      />
-    </svg>
-  );
-}
-
-function RoundtablesIcon() {
-  return (
-    <svg
-      width="136"
-      height="136"
-      viewBox="0 0 136 136"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      className="size-[136px] max-md:size-[80px]"
-      aria-hidden="true"
-    >
-      {/* People in discussion */}
-      <circle cx="68" cy="40" r="14" stroke="#084C79" strokeWidth="2" fill="none" />
-      <path
-        d="M48 75 C48 58 88 58 88 75"
-        stroke="#084C79"
-        strokeWidth="2"
-        fill="none"
-      />
-      <circle cx="35" cy="55" r="10" stroke="#084C79" strokeWidth="2" fill="none" />
-      <path
-        d="M20 85 C20 72 50 72 50 85"
-        stroke="#084C79"
-        strokeWidth="2"
-        fill="none"
-      />
-      <circle cx="101" cy="55" r="10" stroke="#084C79" strokeWidth="2" fill="none" />
-      <path
-        d="M86 85 C86 72 116 72 116 85"
-        stroke="#084C79"
-        strokeWidth="2"
-        fill="none"
-      />
-      <rect
-        x="30"
-        y="90"
-        width="76"
-        height="20"
-        rx="4"
-        stroke="#084C79"
-        strokeWidth="2"
-        fill="none"
-      />
-    </svg>
-  );
-}
-
-function ExpertiseIcon() {
-  return (
-    <svg
-      width="136"
-      height="136"
-      viewBox="0 0 136 136"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      className="size-[136px] max-md:size-[80px]"
-      aria-hidden="true"
-    >
-      {/* Shield with lock */}
-      <path
-        d="M68 20 L108 40 V76 C108 100 68 116 68 116 C68 116 28 100 28 76 V40 Z"
-        stroke="#084C79"
-        strokeWidth="2"
-        fill="none"
-      />
-      <rect
-        x="54"
-        y="62"
-        width="28"
-        height="24"
-        rx="4"
-        stroke="#084C79"
-        strokeWidth="2"
-        fill="none"
-      />
-      <circle cx="68" cy="56" r="10" stroke="#084C79" strokeWidth="2" fill="none" />
-      <circle cx="68" cy="74" r="3" fill="#084C79" />
-    </svg>
-  );
-}
-
-function ReportingIcon() {
-  return (
-    <svg
-      width="136"
-      height="136"
-      viewBox="0 0 136 136"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      className="size-[136px] max-md:size-[80px]"
-      aria-hidden="true"
-    >
-      {/* Chart with upward trend */}
-      <rect
-        x="20"
-        y="30"
-        width="96"
-        height="76"
-        rx="4"
-        stroke="#084C79"
-        strokeWidth="2"
-        fill="none"
-      />
-      <rect x="36" y="70" width="12" height="24" fill="#084C79" opacity="0.3" />
-      <rect x="56" y="58" width="12" height="36" fill="#084C79" opacity="0.5" />
-      <rect x="76" y="46" width="12" height="48" fill="#084C79" opacity="0.7" />
-      <rect x="96" y="38" width="12" height="56" fill="#084C79" opacity="0.9" />
-      <polyline
-        points="42,66 62,54 82,42 102,34"
-        stroke="#084C79"
-        strokeWidth="2"
-        fill="none"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-      <circle cx="102" cy="34" r="3" fill="#084C79" />
-    </svg>
-  );
-}
-
-const iconComponents = [
-  PartnershipIcon,
-  RoundtablesIcon,
-  ExpertiseIcon,
-  ReportingIcon,
-];
-
 export default function CustomersPage() {
   return (
     <section className="bg-light">
@@ -227,7 +43,6 @@ export default function CustomersPage() {
         {/* 2x2 Grid of support items */}
         <div className="mt-14 max-md:mt-10 grid grid-cols-2 max-md:grid-cols-1">
           {supportItems.map((item, index) => {
-            const IconComponent = iconComponents[index];
             // Determine border classes based on position in 2x2 grid
             const isLeft = index % 2 === 0;
             const isTop = index < 2;
@@ -250,7 +65,12 @@ export default function CustomersPage() {
               <div key={item.title} className={borderClasses}>
                 <div className="flex flex-col gap-3">
                   <div className="flex flex-col gap-6">
-                    <IconComponent />
+                    <img
+                      src={item.icon}
+                      alt=""
+                      aria-hidden="true"
+                      className="size-[136px] max-md:size-[80px]"
+                    />
                     <h3 className="text-h5 text-primary-80 leading-[1.2]">
                       {item.title}
                     </h3>

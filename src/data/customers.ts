@@ -16,21 +16,21 @@ export const customers: Customer[] = [
   {
     name: "Library of Congress",
     abbreviation: "LOC",
-    logo: "/loc-logo.jpg",
+    logo: "/loc-logo.png",
     about:
       "LOC is doing an exceptional job of integrating Personnel Security processes with related HR onboarding applications and Physical Security (both badging and facility access) systems, as well as systems that assign computers and other equipment, allocate desk space, and create network credentials, and of course, all DCSA systems including:\n\neDelivery (SAC\u2019s, completed records, RSI\u2019s, delayed replies, electronic file releases (EFR\u2019s) and Rap Back hits), eApp mass initiation, PIPS, Daily Status File, OF79a Adjudications, CVS File Creation, DCSA Rapback Enrollment/Unenrollment/Verification and Enrollment Errors, DCSA Continuous Vetting Enrollment/Unenrollment and Enrollment Errors, and CV Adjudication Results.\n\nThis enterprise approach is greatly enhancing productivity and minimizing human error at LOC.",
   },
   {
     name: "Small Business Administration",
     abbreviation: "SBA",
-    logo: "/sba-logo.jpg",
+    logo: "/sba-logo.png",
     about:
       "The SBA was an early adopter of Trusted Workforce. DataSource worked with SBA to provide all the functionality needed in ABIS to accomplish:\n\nRapBack enrollment/unenrollment/maintenance, Processing of RapBack hits received via eDelivery, CV enrollment, CV unenrollment, Processing of CV cases for federal employees and contractors, Transmitting CV adjudication results back to DCSA, and Reporting of enrollment statistics.\n\nWe continue to work with DCSA to achieve the maximum level of productivity for our customers through optimized integration and interfaces so that they can effectively handle the new workload related to Trusted Workforce initiatives.",
   },
   {
     name: "U.S. International Trade Commission",
     abbreviation: "USITC",
-    logo: "/usitc-logo.jpg",
+    logo: "/usitc-logo.png",
     about:
       "USITC needed a streamlined process for vetting visitors who come to demonstrate their products at USITC offices. We created a process allowing any USITC employee to enter visitor information for automatic transmission to ABIS, triggering a process for appropriate security checks, followed by transmission of information to Physical Security to let them know whether or not to allow the visitor entry to USITC offices. This is an example of how ABIS enables users to configure unique processes based on case type.",
   },

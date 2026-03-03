@@ -53,7 +53,7 @@ export default function CustomerCycler({ customers }: CustomerCyclerProps) {
 
         {/* Customer logo */}
         <div className="flex-1 flex items-center justify-center py-8">
-          <div className="relative w-[280px] h-[280px] max-md:w-[200px] max-md:h-[200px]">
+          <div className="relative w-[360px] h-[360px] max-md:w-[240px] max-md:h-[240px]">
             {customers.map((customer, index) => (
               <div
                 key={customer.abbreviation}
