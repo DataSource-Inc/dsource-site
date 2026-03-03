@@ -15,7 +15,7 @@ export default function ArchitectureSection() {
           {/* Left: Video embed */}
           <div className="w-[773px] shrink-0 max-md:w-full">
             <VideoEmbed
-              videoId="dQw4w9WgXcQ"
+              videoId="v4z2HgtVoU4"
               title="Managing Security Processes with ABIS Architecture"
             />
           </div>
