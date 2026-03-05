@@ -104,13 +104,25 @@ export default async function InsightPage({
 
             {/* Article Body */}
             <div className="mt-16 max-md:mt-10 flex flex-col gap-8">
-              {insight.content.map((paragraph, index) => (
-                <p
-                  key={index}
-                  className="text-body-1 text-gray-100 leading-[1.6]"
-                >
-                  {paragraph}
-                </p>
+              {insight.sections.map((section, index) => (
+                <div key={index} className="flex flex-col gap-4">
+                  <h2 className="text-h5 text-primary-80">
+                    {section.heading}
+                  </h2>
+                  {section.image && (
+                    // eslint-disable-next-line @next/next/no-img-element
+                    <img
+                      src={section.image}
+                      alt={section.heading}
+                      className="w-full rounded-lg"
+                    />
+                  )}
+                  {section.body && (
+                    <p className="text-body-1 text-gray-100 leading-[1.6]">
+                      {section.body}
+                    </p>
+                  )}
+                </div>
               ))}
             </div>
           </div>

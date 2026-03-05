@@ -1,5 +1,7 @@
 "use server";
 
+import { Resend } from "resend";
+
 export type ContactFormState = {
   success: boolean;
   message: string;
@@ -22,31 +24,29 @@ export async function submitContactForm(
     };
   }
 
-  // TODO: Send email here (Resend, Nodemailer, etc.)
-  // Example with Resend:
-  //
-  // import { Resend } from "resend";
-  // const resend = new Resend(process.env.RESEND_API_KEY);
-  // await resend.emails.send({
-  //   from: "noreply@yourdomain.com",
-  //   to: "team@yourdomain.com",
-  //   subject: `Contact Form: ${requestTypes.join(", ")}`,
-  //   text: `
-  //     Request Types: ${requestTypes.join(", ")}
-  //     Agency/Bureau: ${agency}
-  //     Name & Title: ${name}
-  //     Email: ${email}
-  //     Comments: ${comments || "N/A"}
-  //   `,
-  // });
+  const resend = new Resend(process.env.RESEND_API_KEY);
 
-  console.log("Contact form submission:", {
-    requestTypes,
-    agency,
-    name,
-    email,
-    comments,
+  const { error } = await resend.emails.send({
+    from: process.env.RESEND_FROM_ADDRESS!,
+    to: process.env.RESEND_TO_ADDRESS!,
+    subject: `Contact Form: ${requestTypes.join(", ")}`,
+    replyTo: email,
+    text: [
+      `Request Types: ${requestTypes.join(", ")}`,
+      `Agency/Bureau: ${agency}`,
+      `Name & Title: ${name}`,
+      `Email: ${email}`,
+      `Comments: ${comments || "N/A"}`,
+    ].join("\n"),
   });
+
+  if (error) {
+    console.error("Failed to send email:", error);
+    return {
+      success: false,
+      message: "Something went wrong. Please try again later.",
+    };
+  }
 
   return {
     success: true,
