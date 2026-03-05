@@ -159,7 +159,7 @@ Build the shared layout shell that wraps every page.
 
 Server component with nav links. The mobile hamburger triggers MobileMenu (client component).
 
-- Logo: DataSource Inc. logo (`/dsource-logo.png`) linked to `/`
+- Logo: DataSource Inc. logo (`/dsource-logo2.png`) linked to `/`
 - Nav links: Home (`/`), Why ABIS (`/why-abis`), Customers (`/customers`), Contact Us (`/contact`)
 - Active page: underline style (use `usePathname()` in a client wrapper if needed)
 - Mobile: hamburger icon at `md` breakpoint and below

@@ -223,7 +223,7 @@ export default function ContactPage() {
             {/* DataSource Address */}
             <div className="flex flex-col gap-6 mt-[102px] max-md:mt-10">
               <Image
-                src="/dsource-logo.png"
+                src="/dsource-logo2.png"
                 alt="DataSource Inc."
                 width={202}
                 height={40}

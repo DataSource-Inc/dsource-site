@@ -45,7 +45,7 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
       <div className="flex items-center justify-between px-4 py-4">
         <Link href="/" onClick={onClose} className="relative shrink-0">
           <Image
-            src="/dsource-logo.png"
+            src="/dsource-logo2.png"
             alt="DataSource Inc."
             width={162}
             height={32}
