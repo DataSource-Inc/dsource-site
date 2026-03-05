@@ -27,10 +27,19 @@ export async function submitContactForm(
   try {
     const resend = new Resend(process.env.RESEND_API_KEY);
 
+    const date = new Date().toLocaleString("en-US", {
+      timeZone: "America/New_York",
+      month: "2-digit",
+      day: "2-digit",
+      year: "2-digit",
+      hour: "2-digit",
+      minute: "2-digit",
+    });
+
     const { error } = await resend.emails.send({
       from: process.env.RESEND_FROM_ADDRESS!,
       to: process.env.RESEND_TO_ADDRESS!,
-      subject: `Contact Form: ${requestTypes.join(", ")}`,
+      subject: `Contact Form -- ${date} -- from ${name} at ${agency}`,
       replyTo: email,
       text: [
         `Request Types: ${requestTypes.join(", ")}`,
