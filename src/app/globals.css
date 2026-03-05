@@ -66,10 +66,6 @@
 }
 
 /* ── Base Styles ── */
-html {
-  scroll-behavior: smooth;
-}
-
 body {
   color: var(--color-gray-100);
   -webkit-font-smoothing: antialiased;

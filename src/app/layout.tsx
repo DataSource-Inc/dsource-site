@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { fontSans } from "@/lib/fonts";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
+import ScrollToTop from "@/components/ScrollToTop";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -18,6 +19,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={fontSans.variable}>
       <body className="font-sans flex flex-col min-h-screen">
+        <ScrollToTop />
         <Header />
         <main className="flex-1">{children}</main>
         <Footer />
