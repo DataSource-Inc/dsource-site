@@ -74,8 +74,13 @@ export default function RequestForm() {
         </div>
       </div>
 
+      {/* Success state */}
+      {state?.success && (
+        <p className="text-body-1 text-green-700">{state.message}</p>
+      )}
+
       {/* Form fields */}
-      <form action={formAction} className="flex flex-col gap-5">
+      <form action={formAction} className={`flex flex-col gap-5 ${state?.success ? "hidden" : ""}`}>
         {/* Hidden inputs for selected request types */}
         {Array.from(selectedTabs).map((tab) => (
           <input key={tab} type="hidden" name="requestTypes" value={tab} />
@@ -138,15 +143,9 @@ export default function RequestForm() {
           />
         </div>
 
-        {/* Status message */}
-        {state && (
-          <p
-            className={`text-body-1 ${
-              state.success ? "text-green-700" : "text-red-600"
-            }`}
-          >
-            {state.message}
-          </p>
+        {/* Error message */}
+        {state && !state.success && (
+          <p className="text-body-1 text-red-600">{state.message}</p>
         )}
 
         {/* Submit Button */}
