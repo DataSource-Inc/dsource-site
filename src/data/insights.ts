@@ -11,7 +11,7 @@ export const insights: Insight[] = [
     title:
       "Breaking down how Trusted Workforce will improve productivity for Personnel Security offices",
     slug: "trusted-workforce-productivity",
-    icon: "/insights/icon-1.png",
+    icon: "/insights/icon-1.svg",
     excerpt:
       "Getting rid of periodic reinvestigations is a clearly huge time savings for Personnel Security offices \u2013 and besides, the long time period between investigations was just too long and really ineffective for ensuring the suitability of the federal workforce on a continual basis.",
     content: [
@@ -25,7 +25,7 @@ export const insights: Insight[] = [
     title:
       "How Personnel Security is at the hub of key operational processes for Federal Agencies",
     slug: "personnel-security-hub",
-    icon: "/insights/icon-2.png",
+    icon: "/insights/icon-2.svg",
     excerpt:
       "Personnel Security is a fundamental component of both Human Resources/Human Capital and Security. It has to spring into action for hiring, terminations, new contracts, and reports of financial issues, arrests, or other concerns.",
     content: [
@@ -38,7 +38,7 @@ export const insights: Insight[] = [
   {
     title: "The benefits of Integration",
     slug: "benefits-of-integration",
-    icon: "/insights/icon-3.png",
+    icon: "/insights/icon-3.svg",
     excerpt:
       "The degree to which your background investigation/clearance case management application is integrated with HR and Security systems greatly impacts the agency\u2019s ability to function like a well-oiled machine.",
     content: [
@@ -49,7 +49,7 @@ export const insights: Insight[] = [
   {
     title: "How Personnel Security is always evolving",
     slug: "personnel-security-evolving",
-    icon: "/insights/icon-4.png",
+    icon: "/insights/icon-4.svg",
     excerpt:
       "We\u2019ve been in Personnel Security for 25 years and have seen how it is always changing and evolving, from paper forms to eQIP, eDelivery, ODNI metrics reporting, and now Trusted Workforce.",
     content: [

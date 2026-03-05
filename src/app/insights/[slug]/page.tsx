@@ -1,6 +1,5 @@
 import { insights } from "@/data/insights";
 import { notFound } from "next/navigation";
-import Image from "next/image";
 import Link from "next/link";
 import InsightCard from "@/components/ui/InsightCard";
 
@@ -71,13 +70,35 @@ export default async function InsightPage({
             </h1>
 
             {/* Icon / Illustration Area */}
-            <div className="mt-16 max-md:mt-10 bg-beige rounded-lg overflow-hidden flex items-center justify-center h-[180px]">
-              <Image
+            <div className="mt-16 max-md:mt-10 bg-beige rounded-lg relative h-[180px] overflow-hidden">
+              {/* Decorative geometric lines */}
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="/insights/geo-center.svg"
+                alt=""
+                className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[725px] h-[401px] pointer-events-none"
+                aria-hidden="true"
+              />
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="/insights/geo-right.svg"
+                alt=""
+                className="absolute right-[-200px] top-[-280px] w-[641px] h-[680px] -rotate-[124deg] -scale-y-100 pointer-events-none"
+                aria-hidden="true"
+              />
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="/insights/geo-left.svg"
+                alt=""
+                className="absolute left-[-267px] top-[-218px] w-[571px] h-[646px] -rotate-[120deg] pointer-events-none"
+                aria-hidden="true"
+              />
+              {/* Icon */}
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
                 src={insight.icon}
                 alt=""
-                width={92}
-                height={135}
-                className="object-contain"
+                className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 h-[135px] w-auto"
               />
             </div>
 
