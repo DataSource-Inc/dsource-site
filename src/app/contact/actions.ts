@@ -24,32 +24,40 @@ export async function submitContactForm(
     };
   }
 
-  const resend = new Resend(process.env.RESEND_API_KEY);
+  try {
+    const resend = new Resend(process.env.RESEND_API_KEY);
 
-  const { error } = await resend.emails.send({
-    from: process.env.RESEND_FROM_ADDRESS!,
-    to: process.env.RESEND_TO_ADDRESS!,
-    subject: `Contact Form: ${requestTypes.join(", ")}`,
-    replyTo: email,
-    text: [
-      `Request Types: ${requestTypes.join(", ")}`,
-      `Agency/Bureau: ${agency}`,
-      `Name & Title: ${name}`,
-      `Email: ${email}`,
-      `Comments: ${comments || "N/A"}`,
-    ].join("\n"),
-  });
+    const { error } = await resend.emails.send({
+      from: process.env.RESEND_FROM_ADDRESS!,
+      to: process.env.RESEND_TO_ADDRESS!,
+      subject: `Contact Form: ${requestTypes.join(", ")}`,
+      replyTo: email,
+      text: [
+        `Request Types: ${requestTypes.join(", ")}`,
+        `Agency/Bureau: ${agency}`,
+        `Name & Title: ${name}`,
+        `Email: ${email}`,
+        `Comments: ${comments || "N/A"}`,
+      ].join("\n"),
+    });
 
-  if (error) {
-    console.error("Failed to send email:", error);
+    if (error) {
+      console.error("Failed to send email:", error);
+      return {
+        success: false,
+        message: "Something went wrong. Please try again later.",
+      };
+    }
+
+    return {
+      success: true,
+      message: "Thank you! Your request has been submitted.",
+    };
+  } catch (err) {
+    console.error("Contact form error:", err);
     return {
       success: false,
       message: "Something went wrong. Please try again later.",
     };
   }
-
-  return {
-    success: true,
-    message: "Thank you! Your request has been submitted.",
-  };
 }
