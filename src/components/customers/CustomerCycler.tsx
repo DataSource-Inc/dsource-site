@@ -16,12 +16,12 @@ export default function CustomerCycler({ customers }: CustomerCyclerProps) {
 
   const [leftIndex, setLeftIndex] = useState(0);
   const [frontAboutIndex, setFrontAboutIndex] = useState(0);
-  const [backIndex, setBackIndex] = useState(0);
+  const [backAboutIndex, setBackAboutIndex] = useState(0);
 
   const flipRef = useRef<HTMLDivElement>(null);
   const timeoutsRef = useRef<NodeJS.Timeout[]>([]);
 
-  const clearTimeouts = () => {
+  const clearAllTimeouts = () => {
     timeoutsRef.current.forEach(clearTimeout);
     timeoutsRef.current = [];
   };
@@ -29,32 +29,31 @@ export default function CustomerCycler({ customers }: CustomerCyclerProps) {
   const triggerFlip = useCallback((newIndex: number, direction: 'next' | 'prev') => {
     if (isFlipping) return;
 
-    setBackIndex(newIndex);
+    // Back face gets the NEW about content
+    setBackAboutIndex(newIndex);
     setFlipDirection(direction);
     setIsFlipping(true);
 
-    // Midpoint: update the left side content (page covers it at this point)
+    // Midpoint: page is edge-on covering left side, safe to swap left content
     const mid = setTimeout(() => {
       setLeftIndex(newIndex);
     }, 450);
     timeoutsRef.current.push(mid);
 
-    // End: seamlessly reset
+    // End: page is at -180deg showing back face (new about).
+    // Set front face to same content, then snap to 0deg — visually identical.
     const end = setTimeout(() => {
-      const el = flipRef.current;
-      if (el) {
-        // Instantly snap back to 0deg with no visible transition
-        el.style.transition = 'none';
-        el.style.transform = 'rotateY(0deg)';
-        // Force reflow so the snap happens before React re-renders
-        el.offsetHeight;
-      }
+      // Update front to match back FIRST
       setFrontAboutIndex(newIndex);
       setIsFlipping(false);
 
-      // Re-enable transitions on next frame
+      // Then snap rotation to 0 on next frame (content already matches)
       requestAnimationFrame(() => {
+        const el = flipRef.current;
         if (el) {
+          el.style.transition = 'none';
+          el.style.transform = 'rotateY(0deg)';
+          el.offsetHeight; // force reflow
           el.style.transition = '';
           el.style.transform = '';
         }
@@ -82,7 +81,7 @@ export default function CustomerCycler({ customers }: CustomerCyclerProps) {
   }, [isPaused, goToNext]);
 
   useEffect(() => {
-    return clearTimeouts;
+    return clearAllTimeouts;
   }, []);
 
   const handleDotClick = (index: number) => {
@@ -104,7 +103,7 @@ export default function CustomerCycler({ customers }: CustomerCyclerProps) {
 
   const leftCustomer = customers[leftIndex];
   const frontAbout = customers[frontAboutIndex];
-  const backCustomer = customers[backIndex];
+  const backAbout = customers[backAboutIndex];
 
   const animationName = isFlipping
     ? flipDirection === 'next' ? 'page-turn-next' : 'page-turn-prev'
@@ -112,77 +111,76 @@ export default function CustomerCycler({ customers }: CustomerCyclerProps) {
 
   return (
     <div className="w-full flex flex-col">
+      {/* Preload all customer logos so they don't cause layout shift */}
+      <div className="hidden">
+        {customers.map((c) => (
+          <Image key={c.abbreviation} src={c.logo} alt="" width={380} height={380} priority />
+        ))}
+      </div>
+
       {/* Book area */}
       <div className="w-full h-[620px] max-md:h-auto max-md:min-h-[400px] flex max-md:flex-col" style={{ perspective: '2500px' }}>
-        {/* Left half - Customer name + logo (static, sits behind the flipping page) */}
+        {/* Left half - Customer name + logo */}
         <div className="w-1/2 max-md:w-full max-md:min-h-[300px] bg-light relative flex flex-col p-10 max-md:p-6">
-          <h1 className="text-h3 max-md:text-h4 text-primary-80 tracking-[-1px] max-w-[440px]">
-            {leftCustomer.name} ({leftCustomer.abbreviation})
-          </h1>
+          <div className="h-[120px] max-md:h-[80px] flex items-start shrink-0">
+            <h1 className="text-h3 max-md:text-h4 text-primary-80 tracking-[-1px] max-w-[440px]">
+              {leftCustomer.name} ({leftCustomer.abbreviation})
+            </h1>
+          </div>
 
-          <div className="flex-1 flex items-center justify-center py-8">
+          <div className="flex-1 flex items-center justify-center">
             <div className="relative w-[360px] h-[360px] max-md:w-[240px] max-md:h-[240px]">
-              <div className="absolute inset-0 flex items-center justify-center">
-                <Image
-                  src={leftCustomer.logo}
-                  alt={`${leftCustomer.name} logo`}
-                  width={380}
-                  height={380}
-                  className="object-contain max-w-full max-h-full"
-                />
-              </div>
+              <Image
+                src={leftCustomer.logo}
+                alt={`${leftCustomer.name} logo`}
+                fill
+                className="object-contain"
+              />
             </div>
           </div>
         </div>
 
-        {/* Right half - The flipping page */}
-        <div
-          ref={flipRef}
-          className="w-1/2 max-md:w-full h-full max-md:min-h-[300px] relative"
-          style={{
-            transformStyle: 'preserve-3d',
-            transformOrigin: 'left center',
-            animation: animationName ? `${animationName} 0.9s ease-in-out forwards` : undefined,
-          }}
-        >
-          {/* Front face: About section */}
+        {/* Right half - bg-beige behind the flip so it matches */}
+        <div className="w-1/2 max-md:w-full h-full max-md:min-h-[300px] relative bg-beige">
+          {/* The flipping page */}
           <div
-            className="absolute inset-0 bg-beige p-10 max-md:p-6 overflow-y-auto"
-            style={{ backfaceVisibility: 'hidden' }}
-          >
-            <h2 className="text-h5 text-primary-80 mb-6">About</h2>
-            <div className="text-body-1 text-gray-100 whitespace-pre-line leading-[1.4]">
-              {frontAbout.about}
-            </div>
-          </div>
-
-          {/* Back face: New customer name + logo (what you see when the page flips over) */}
-          <div
-            className="absolute inset-0 bg-light p-10 max-md:p-6 flex flex-col"
+            ref={flipRef}
+            className="absolute inset-0"
             style={{
-              backfaceVisibility: 'hidden',
-              transform: 'rotateY(180deg)',
+              transformStyle: 'preserve-3d',
+              transformOrigin: 'left center',
+              animation: animationName ? `${animationName} 0.9s ease-in-out forwards` : undefined,
             }}
           >
-            <h2 className="text-h3 max-md:text-h4 text-primary-80 tracking-[-1px] max-w-[440px]">
-              {backCustomer.name} ({backCustomer.abbreviation})
-            </h2>
-            <div className="flex-1 flex items-center justify-center py-8">
-              <div className="relative w-[360px] h-[360px] max-md:w-[240px] max-md:h-[240px]">
-                <Image
-                  src={backCustomer.logo}
-                  alt={`${backCustomer.name} logo`}
-                  width={380}
-                  height={380}
-                  className="object-contain max-w-full max-h-full"
-                />
+            {/* Front face: current About */}
+            <div
+              className="absolute inset-0 bg-beige p-10 max-md:p-6 overflow-y-auto"
+              style={{ backfaceVisibility: 'hidden' }}
+            >
+              <h2 className="text-h5 text-primary-80 mb-6">About</h2>
+              <div className="text-body-1 text-gray-100 whitespace-pre-line leading-[1.4]">
+                {frontAbout.about}
+              </div>
+            </div>
+
+            {/* Back face: new About (same layout, so snap from -180 to 0 is invisible) */}
+            <div
+              className="absolute inset-0 bg-beige p-10 max-md:p-6 overflow-y-auto"
+              style={{
+                backfaceVisibility: 'hidden',
+                transform: 'rotateY(180deg)',
+              }}
+            >
+              <h2 className="text-h5 text-primary-80 mb-6">About</h2>
+              <div className="text-body-1 text-gray-100 whitespace-pre-line leading-[1.4]">
+                {backAbout.about}
               </div>
             </div>
           </div>
         </div>
       </div>
 
-      {/* Navigation controls - always visible below the book */}
+      {/* Navigation controls - always visible */}
       <div className="flex items-center justify-between px-10 max-md:px-6 py-6">
         <span className="text-body-1 text-gray-100">
           {activeIndex + 1}/{customers.length}
