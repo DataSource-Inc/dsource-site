@@ -1,6 +1,6 @@
 "use client";
 
-import { useActionState, useState } from "react";
+import { useActionState, useEffect, useState } from "react";
 import Button from "@/components/ui/Button";
 import {
   submitContactForm,
@@ -28,6 +28,18 @@ export default function RequestForm() {
       return next;
     });
   };
+
+
+  useEffect(() => { 
+    if (state?.success) {
+      // refresh in 3 seconds to reset form and clear state
+      const timeout = setTimeout(() => {
+        window.location.reload();
+      }, 2000);
+      return () => clearTimeout(timeout);
+    }
+  }, [state])
+
 
   return (
     <div className="bg-beige flex flex-col gap-6 p-6">
