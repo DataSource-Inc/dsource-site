@@ -10,6 +10,7 @@ const NAV_LINKS = [
   { href: "/", label: "Home" },
   { href: "/why-abis", label: "Why ABIS" },
   { href: "/customers", label: "Customers" },
+  { href: "/insights/trusted-workforce-productivity", label: "Insights" },
   { href: "/contact", label: "Contact Us" },
 ] as const;
 

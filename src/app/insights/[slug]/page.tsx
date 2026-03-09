@@ -37,30 +37,6 @@ export default async function InsightPage({
     <section className="bg-light">
       {/* Article Header & Content */}
       <div className="mx-auto max-w-[1200px] px-10 max-md:px-4 pt-14 pb-20 max-md:pt-10 max-md:pb-14">
-        {/* Back Navigation */}
-        <Link
-          href="/#insights"
-          className="inline-flex items-center gap-2 text-body-1 text-gray-100 hover:text-primary-80 transition-colors mb-10 max-md:mb-6"
-        >
-          <svg
-            width="20"
-            height="20"
-            viewBox="0 0 20 20"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-            aria-hidden="true"
-          >
-            <path
-              d="M12.5 15L7.5 10L12.5 5"
-              stroke="currentColor"
-              strokeWidth="1.5"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-          </svg>
-          Back to Insights
-        </Link>
-
         {/* Centered Article Content */}
         <div className="flex justify-center">
           <div className="w-full max-w-[692px]">

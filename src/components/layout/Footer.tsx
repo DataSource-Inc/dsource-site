@@ -5,6 +5,7 @@ const NAV_LINKS = [
   { href: "/", label: "Home" },
   { href: "/why-abis", label: "Why ABIS" },
   { href: "/customers", label: "Customers" },
+  { href: "/insights/trusted-workforce-productivity", label: "Insights" },
   { href: "/contact", label: "Contact Us" },
   { href: "/privacy-policy", label: "Privacy Policy" },
 ] as const;
@@ -78,6 +79,12 @@ export default function Footer() {
             </Link>
           </div>
           <div className="flex flex-col gap-3">
+            <Link
+              href="/insights/trusted-workforce-productivity"
+              className="text-body-1 leading-[1.4] text-gray-100 hover:text-primary-80"
+            >
+              Insights
+            </Link>
             <Link
               href="/contact"
               className="text-body-1 leading-[1.4] text-gray-100 hover:text-primary-80"
