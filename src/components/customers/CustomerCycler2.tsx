@@ -75,6 +75,8 @@ export default function CustomerCycler({ customers }: CustomerCyclerProps) {
     pauseAutoAdvance();
   };
 
+  // Only update counter/dots at midpoint. Do NOT swap displayedIndex here —
+  // the turning page visually carries the content via its back face.
   const handleAnimationUpdate = useCallback(
     (latest: { rotateY?: number }) => {
       if (hasCrossedMidpoint.current) return;
@@ -82,13 +84,13 @@ export default function CustomerCycler({ customers }: CustomerCyclerProps) {
       const pastMidpoint = flipDirection === 'next' ? r <= -90 : r >= 90;
       if (pastMidpoint) {
         hasCrossedMidpoint.current = true;
-        setDisplayedIndex(targetIndex);
         setActiveIndex(targetIndex);
       }
     },
     [flipDirection, targetIndex],
   );
 
+  // Only swap base layer content after the page has fully landed.
   const handleAnimationComplete = useCallback(() => {
     setDisplayedIndex(targetIndex);
     setActiveIndex(targetIndex);
@@ -107,8 +109,7 @@ export default function CustomerCycler({ customers }: CustomerCyclerProps) {
         style={{ perspective: 2000 }}
       >
         {/* ===== LEFT PAGE (static base) ===== */}
-        <div className="w-1/2 max-md:w-full max-md:min-h-[300px] bg-light relative flex flex-col p-10 max-md:p-6 overflow-hidden">
-          {/* Static left content - shown normally, swaps at midpoint via displayedIndex */}
+        <div className="w-1/2 max-md:w-full max-md:min-h-[300px] bg-light relative flex flex-col p-10 max-md:p-6">
           <div className="h-[120px] max-md:h-[80px] flex items-start shrink-0">
             <h1 className="text-h3 max-md:text-h4 text-primary-80 tracking-[-1px] max-w-[440px]">
               {current.name} ({current.abbreviation})
@@ -124,12 +125,61 @@ export default function CustomerCycler({ customers }: CustomerCyclerProps) {
               />
             </div>
           </div>
+        </div>
 
-          {/* REVERSE: turning page overlays the ENTIRE left panel */}
-          {isFlipping && flipDirection === 'prev' && (
-            <>
-              {/* Underneath: target logo (revealed as page lifts) */}
-              <div className="absolute inset-0 z-[1] bg-light flex flex-col p-10 max-md:p-6">
+        {/* ===== RIGHT PAGE (static base) ===== */}
+        <div className="w-1/2 max-md:w-full max-md:min-h-[300px] bg-beige relative">
+          <div className="absolute inset-0 p-10 max-md:p-6 overflow-y-auto">
+            <h2 className="text-h5 text-primary-80 mb-6">About</h2>
+            <div className="text-body-1 text-gray-100 whitespace-pre-line leading-[1.4]">
+              {current.about}
+            </div>
+          </div>
+        </div>
+
+        {/* ===== FORWARD: turning page at BOOK level (spans both halves) ===== */}
+        {/* Starts covering the right half, hinges at the spine (left edge = center of book),
+            rotates to -180 to lay flat on the left half. Not clipped by either panel. */}
+        {isFlipping && flipDirection === 'next' && (
+          <>
+            {/* Underneath layer: target about on right side */}
+            <div className="absolute top-0 right-0 w-1/2 h-full z-[1] bg-beige p-10 max-md:p-6 overflow-y-auto">
+              <h2 className="text-h5 text-primary-80 mb-6">About</h2>
+              <div className="text-body-1 text-gray-100 whitespace-pre-line leading-[1.4]">
+                {target.about}
+              </div>
+            </div>
+
+            {/* The turning page — positioned on right half, hinges on its left edge (the spine) */}
+            <motion.div
+              className="absolute top-0 right-0 w-1/2 h-full z-[3]"
+              style={{
+                transformStyle: 'preserve-3d',
+                transformOrigin: 'left center',
+              }}
+              animate={{ rotateY }}
+              transition={flipTransition}
+              onUpdate={handleAnimationUpdate}
+              onAnimationComplete={handleAnimationComplete}
+            >
+              {/* Front face: current about */}
+              <div
+                className="absolute inset-0 bg-beige p-10 max-md:p-6 overflow-y-auto"
+                style={{ backfaceVisibility: 'hidden' }}
+              >
+                <h2 className="text-h5 text-primary-80 mb-6">About</h2>
+                <div className="text-body-1 text-gray-100 whitespace-pre-line leading-[1.4]">
+                  {current.about}
+                </div>
+              </div>
+              {/* Back face: target logo (lands on left side) */}
+              <div
+                className="absolute inset-0 bg-light flex flex-col p-10 max-md:p-6"
+                style={{
+                  backfaceVisibility: 'hidden',
+                  transform: 'rotateY(180deg)',
+                }}
+              >
                 <div className="h-[120px] max-md:h-[80px] flex items-start shrink-0">
                   <h1 className="text-h3 max-md:text-h4 text-primary-80 tracking-[-1px] max-w-[440px]">
                     {target.name} ({target.abbreviation})
@@ -146,129 +196,83 @@ export default function CustomerCycler({ customers }: CustomerCyclerProps) {
                   </div>
                 </div>
               </div>
+            </motion.div>
+          </>
+        )}
 
-              {/* The turning page - full panel, hinged on right edge (the spine) */}
-              <motion.div
-                className="absolute inset-0 z-[2]"
-                style={{
-                  transformStyle: 'preserve-3d',
-                  transformOrigin: 'right center',
-                }}
-                animate={{ rotateY }}
-                transition={flipTransition}
-                onUpdate={handleAnimationUpdate}
-                onAnimationComplete={handleAnimationComplete}
-              >
-                {/* Front face: current logo (full page with bg) */}
-                <div
-                  className="absolute inset-0 bg-light flex flex-col p-10 max-md:p-6"
-                  style={{ backfaceVisibility: 'hidden' }}
-                >
-                  <div className="h-[120px] max-md:h-[80px] flex items-start shrink-0">
-                    <h1 className="text-h3 max-md:text-h4 text-primary-80 tracking-[-1px] max-w-[440px]">
-                      {current.name} ({current.abbreviation})
-                    </h1>
-                  </div>
-                  <div className="flex-1 flex items-center justify-center">
-                    <div className="relative w-[360px] h-[360px] max-md:w-[240px] max-md:h-[240px]">
-                      <Image
-                        src={current.logo}
-                        alt={`${current.name} logo`}
-                        fill
-                        className="object-contain"
-                      />
-                    </div>
-                  </div>
+        {/* ===== REVERSE: turning page at BOOK level (spans both halves) ===== */}
+        {/* Starts covering the left half, hinges at the spine (right edge = center of book),
+            rotates to 180 to lay flat on the right half. */}
+        {isFlipping && flipDirection === 'prev' && (
+          <>
+            {/* Underneath layer: target logo on left side */}
+            <div className="absolute top-0 left-0 w-1/2 h-full z-[1] bg-light flex flex-col p-10 max-md:p-6">
+              <div className="h-[120px] max-md:h-[80px] flex items-start shrink-0">
+                <h1 className="text-h3 max-md:text-h4 text-primary-80 tracking-[-1px] max-w-[440px]">
+                  {target.name} ({target.abbreviation})
+                </h1>
+              </div>
+              <div className="flex-1 flex items-center justify-center">
+                <div className="relative w-[360px] h-[360px] max-md:w-[240px] max-md:h-[240px]">
+                  <Image
+                    src={target.logo}
+                    alt={`${target.name} logo`}
+                    fill
+                    className="object-contain"
+                  />
                 </div>
-                {/* Back face: target about (what you see when page lands on right) */}
-                <div
-                  className="absolute inset-0 bg-beige p-10 max-md:p-6 overflow-y-auto"
-                  style={{
-                    backfaceVisibility: 'hidden',
-                    transform: 'rotateY(180deg)',
-                  }}
-                >
-                  <h2 className="text-h5 text-primary-80 mb-6">About</h2>
-                  <div className="text-body-1 text-gray-100 whitespace-pre-line leading-[1.4]">
-                    {target.about}
-                  </div>
-                </div>
-              </motion.div>
-            </>
-          )}
-        </div>
-
-        {/* ===== RIGHT PAGE (static base) ===== */}
-        <div className="w-1/2 max-md:w-full max-md:min-h-[300px] bg-beige relative overflow-hidden">
-          {/* Static right content */}
-          <div className="absolute inset-0 p-10 max-md:p-6 overflow-y-auto">
-            <h2 className="text-h5 text-primary-80 mb-6">About</h2>
-            <div className="text-body-1 text-gray-100 whitespace-pre-line leading-[1.4]">
-              {current.about}
+              </div>
             </div>
-          </div>
 
-          {/* FORWARD: turning page overlays the ENTIRE right panel */}
-          {isFlipping && flipDirection === 'next' && (
-            <>
-              {/* Underneath: target about (revealed as page lifts) */}
-              <div className="absolute inset-0 z-[1] bg-beige p-10 max-md:p-6 overflow-y-auto">
+            {/* The turning page — positioned on left half, hinges on its right edge (the spine) */}
+            <motion.div
+              className="absolute top-0 left-0 w-1/2 h-full z-[3]"
+              style={{
+                transformStyle: 'preserve-3d',
+                transformOrigin: 'right center',
+              }}
+              animate={{ rotateY }}
+              transition={flipTransition}
+              onUpdate={handleAnimationUpdate}
+              onAnimationComplete={handleAnimationComplete}
+            >
+              {/* Front face: current logo */}
+              <div
+                className="absolute inset-0 bg-light flex flex-col p-10 max-md:p-6"
+                style={{ backfaceVisibility: 'hidden' }}
+              >
+                <div className="h-[120px] max-md:h-[80px] flex items-start shrink-0">
+                  <h1 className="text-h3 max-md:text-h4 text-primary-80 tracking-[-1px] max-w-[440px]">
+                    {current.name} ({current.abbreviation})
+                  </h1>
+                </div>
+                <div className="flex-1 flex items-center justify-center">
+                  <div className="relative w-[360px] h-[360px] max-md:w-[240px] max-md:h-[240px]">
+                    <Image
+                      src={current.logo}
+                      alt={`${current.name} logo`}
+                      fill
+                      className="object-contain"
+                    />
+                  </div>
+                </div>
+              </div>
+              {/* Back face: target about (lands on right side) */}
+              <div
+                className="absolute inset-0 bg-beige p-10 max-md:p-6 overflow-y-auto"
+                style={{
+                  backfaceVisibility: 'hidden',
+                  transform: 'rotateY(180deg)',
+                }}
+              >
                 <h2 className="text-h5 text-primary-80 mb-6">About</h2>
                 <div className="text-body-1 text-gray-100 whitespace-pre-line leading-[1.4]">
                   {target.about}
                 </div>
               </div>
-
-              {/* The turning page - full panel, hinged on left edge (the spine) */}
-              <motion.div
-                className="absolute inset-0 z-[2]"
-                style={{
-                  transformStyle: 'preserve-3d',
-                  transformOrigin: 'left center',
-                }}
-                animate={{ rotateY }}
-                transition={flipTransition}
-                onUpdate={handleAnimationUpdate}
-                onAnimationComplete={handleAnimationComplete}
-              >
-                {/* Front face: current about (full page with bg) */}
-                <div
-                  className="absolute inset-0 bg-beige p-10 max-md:p-6 overflow-y-auto"
-                  style={{ backfaceVisibility: 'hidden' }}
-                >
-                  <h2 className="text-h5 text-primary-80 mb-6">About</h2>
-                  <div className="text-body-1 text-gray-100 whitespace-pre-line leading-[1.4]">
-                    {current.about}
-                  </div>
-                </div>
-                {/* Back face: target logo (what you see when page lands on left) */}
-                <div
-                  className="absolute inset-0 bg-light flex flex-col p-10 max-md:p-6"
-                  style={{
-                    backfaceVisibility: 'hidden',
-                    transform: 'rotateY(180deg)',
-                  }}
-                >
-                  <div className="h-[120px] max-md:h-[80px] flex items-start shrink-0">
-                    <h1 className="text-h3 max-md:text-h4 text-primary-80 tracking-[-1px] max-w-[440px]">
-                      {target.name} ({target.abbreviation})
-                    </h1>
-                  </div>
-                  <div className="flex-1 flex items-center justify-center">
-                    <div className="relative w-[360px] h-[360px] max-md:w-[240px] max-md:h-[240px]">
-                      <Image
-                        src={target.logo}
-                        alt={`${target.name} logo`}
-                        fill
-                        className="object-contain"
-                      />
-                    </div>
-                  </div>
-                </div>
-              </motion.div>
-            </>
-          )}
-        </div>
+            </motion.div>
+          </>
+        )}
       </div>
 
       {/* Navigation controls */}
