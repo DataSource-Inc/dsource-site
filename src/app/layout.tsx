@@ -17,7 +17,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={fontSans.variable}>
+    <html lang="en" className={`${fontSans.variable} scroll-smooth`}>
       <body className="font-sans flex flex-col min-h-screen">
         <ScrollToTop />
         <Header />
