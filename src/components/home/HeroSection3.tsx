@@ -1,6 +1,7 @@
 'use client';
 
 import Image from "next/image";
+import { useState, useCallback, useRef } from "react";
 import { motion } from "framer-motion";
 import Button from "@/components/ui/Button";
 
@@ -16,8 +17,8 @@ type Phase = keyof typeof TIMING;
 
 type AnimState = { opacity: number; scale?: number; x?: number; y?: number };
 
-/** Returns `initial`, `animate`, and `transition` props for a given phase. */
-function fadeIn(phase: Phase, custom?: { initial: AnimState; animate: AnimState }) {
+/** Returns `initial` and `transition` props for a given phase, plus an `animate` value gated on `ready`. */
+function fadeIn(phase: Phase, ready: boolean, custom?: { initial: AnimState; animate: AnimState }) {
   const { delay, duration } = TIMING[phase];
   const ease = [0.25, 0.1, 0.25, 1] as const;
 
@@ -42,15 +43,26 @@ function fadeIn(phase: Phase, custom?: { initial: AnimState; animate: AnimState 
 
   const { initial, animate } = custom ?? defaults[phase];
 
-  return { initial, animate, transition: { delay, duration, ease } };
+  return { initial, animate: ready ? animate : initial, transition: { delay, duration, ease } };
 }
 
+// Images that must load before animations start
+const HERO_IMAGES = ["/abis-logo.png", "/hero-dots.png"] as const;
+
 export default function HeroSection() {
+  const [ready, setReady] = useState(false);
+  const loadedRef = useRef(0);
+
+  const handleImageLoad = useCallback(() => {
+    loadedRef.current += 1;
+    if (loadedRef.current >= HERO_IMAGES.length) setReady(true);
+  }, []);
+
   return (
     <section className="relative  overflow-hidden">
       {/* Decorative dotted world map - left side */}
       <motion.div
-        {...fadeIn('dots')}
+        {...fadeIn('dots', ready)}
         className="absolute left-[-26%] top-[35%] w-[50%] h-[55%] pointer-events-none max-md:hidden"
         aria-hidden="true"
       >
@@ -58,12 +70,14 @@ export default function HeroSection() {
           src="/hero-dots.png"
           alt=""
           fill
+          priority
           className="object-contain"
+          onLoad={handleImageLoad}
         />
       </motion.div>
       {/* Decorative dotted world map - right side (mirrored) */}
       <motion.div
-        {...fadeIn('dots', {
+        {...fadeIn('dots', ready, {
           initial: { opacity: 0, x: -80 },
           animate: { opacity: 0.6, x: 0 },
         })}
@@ -74,6 +88,7 @@ export default function HeroSection() {
           src="/hero-dots.png"
           alt=""
           fill
+          priority
           className="object-contain"
         />
       </motion.div>
@@ -82,7 +97,7 @@ export default function HeroSection() {
         <div className="flex flex-col items-center text-center max-w-[987px] mx-auto gap-[52px] max-md:gap-10">
           {/* Main heading */}
           <motion.h1
-            {...fadeIn('heading')}
+            {...fadeIn('heading', ready)}
             className="text-h1 text-primary-80 tracking-[-1.28px] max-md:text-[32px] max-md:leading-[1.2]"
           >
             Take the Heavy Lifting out of Trusted Workforce with ABIS
@@ -91,19 +106,21 @@ export default function HeroSection() {
           {/* ABIS logo + subtitle block */}
           <div className="flex flex-col items-center gap-16 max-md:gap-10">
             {/* ABIS Logo */}
-            <motion.div {...fadeIn('logo')}>
+            <motion.div {...fadeIn('logo', ready)}>
               <Image
                 src="/abis-logo.png"
                 alt="ABIS Personnel Security"
                 width={240}
                 height={86}
+                priority
                 className="max-md:w-[161px] max-md:h-auto"
+                onLoad={handleImageLoad}
               />
             </motion.div>
 
             {/* Subtitle area */}
             <motion.div
-              {...fadeIn('subtext')}
+              {...fadeIn('subtext', ready)}
               className="flex flex-col items-center gap-8 max-md:gap-6"
             >
               {/* Tag pill */}
@@ -124,7 +141,7 @@ export default function HeroSection() {
           </div>
 
           {/* CTA Button */}
-          <motion.div {...fadeIn('subtext')}>
+          <motion.div {...fadeIn('subtext', ready)}>
             <Button href="/contact" className="w-[285px] justify-between max-md:w-full">
               Request a Demo
             </Button>
