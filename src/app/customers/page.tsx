@@ -1,5 +1,5 @@
 import { customers } from "@/data/customers";
-import CustomerCycler from "@/components/customers/CustomerCycler";
+import CustomerCycler from "@/components/customers/CustomerCycler2";
 
 const supportItems = [
   {
