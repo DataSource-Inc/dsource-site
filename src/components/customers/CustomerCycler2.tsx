@@ -23,7 +23,7 @@ export default function CustomerCycler({ customers }: CustomerCyclerProps) {
 
   const flipTransition = {
     type: 'tween' as const,
-    duration: 0.8,
+    duration: 0.5,
     ease: 'easeInOut' as const,
   };
 
