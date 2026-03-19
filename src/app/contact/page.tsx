@@ -208,9 +208,14 @@ export default function ContactPage() {
                   <span className="text-body-2 leading-[1.4] text-gray-100">
                     GSA Schedule Contract
                   </span>
-                  <span className="text-body-1 leading-[1.4] text-primary-80">
+                  <a
+                    href="https://www.gsaelibrary.gsa.gov/ElibMain/contractorInfo.do?contractNumber=GS-35F-410GA&contractorName=DATASOURCE%2C+INC.&executeQuery=YES"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-body-1 leading-[1.4] text-primary-80 hover:underline cursor-pointer"
+                  >
                     GS-35F-410GA
-                  </span>
+                  </a>
                 </div>
                 <ul className="list-disc ml-6 text-body-1 leading-[1.4] text-primary-80 space-y-2">
                   <li>Software Licenses</li>
