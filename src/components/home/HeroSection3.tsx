@@ -132,7 +132,7 @@ export default function HeroSection() {
 
               {/* Description */}
               <p className="text-body-1 text-gray-100 max-w-[535px] max-md:max-w-full">
-                ABIS includes standard case management functionality, such as
+                ABIS (Automated Background Investigation System) includes standard case management functionality, such as
                 workflow and document management, but much more than that, ABIS
                 automates every Personnel Security-specific task for Federal
                 agencies.
