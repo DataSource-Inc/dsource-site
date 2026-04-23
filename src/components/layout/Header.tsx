@@ -61,7 +61,9 @@ export default function Header() {
             type="button"
             className="flex items-center justify-center md:hidden"
             onClick={() => setMobileMenuOpen(true)}
-            aria-label="Open menu"
+            aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
+            aria-expanded={mobileMenuOpen}
+            aria-controls="mobile-menu"
           >
             <svg
               width="32"

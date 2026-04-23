@@ -41,7 +41,7 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-[100] bg-beige">
+    <div id="mobile-menu" role="dialog" aria-modal="true" aria-label="Mobile menu" className="fixed inset-0 z-[100] bg-beige">
       {/* Top bar: logo + close */}
       <div className="flex items-center justify-between px-4 py-4">
         <Link href="/" onClick={onClose} className="relative shrink-0">
