@@ -3,12 +3,16 @@ import Image from "next/image";
 import RequestForm from "@/components/contact/RequestForm";
 
 export const metadata: Metadata = {
-  title: "Contact Us",
+  title: {
+    absolute: "Contact DataSource — ABIS Personnel Security Software",
+  },
   description:
-    "Get in touch with DataSource to learn more about the ABIS Personnel Security platform.",
+    "Request a demo or ask about ABIS, DataSource's Personnel Security software for Federal background investigations, adjudication, and Continuous Vetting.",
   alternates: { canonical: "/contact" },
   openGraph: {
-    title: "Contact Us | DataSource Inc.",
+    title: "Contact DataSource — ABIS Personnel Security Software",
+    description:
+      "Request a demo or ask about ABIS, DataSource's Personnel Security software for Federal background investigations, adjudication, and Continuous Vetting.",
     url: "https://datasourceinc.com/contact",
   },
 };

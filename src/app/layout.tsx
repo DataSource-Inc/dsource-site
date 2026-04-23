@@ -8,20 +8,20 @@ import "./globals.css";
 export const metadata: Metadata = {
   metadataBase: new URL("https://datasourceinc.com"),
   title: {
-    default: "ABIS Personnel Security Platform | DataSource Inc.",
+    default: "ABIS Personnel Security Software | DataSource Inc.",
     template: "%s | DataSource Inc.",
   },
   description:
-    "DataSource provides ABIS, a comprehensive solution for Federal Personnel Security offices.",
+    "ABIS by DataSource is Personnel Security software for Federal agencies — automating background investigations, Continuous Vetting, and Trusted Workforce 2.0 workflows.",
   alternates: {
     canonical: "/",
   },
   openGraph: {
     type: "website",
     siteName: "DataSource Inc.",
-    title: "ABIS Personnel Security Platform | DataSource Inc.",
+    title: "ABIS Personnel Security Software | DataSource Inc.",
     description:
-      "DataSource provides ABIS, a comprehensive solution for Federal Personnel Security offices.",
+      "ABIS by DataSource is Personnel Security software for Federal agencies — automating background investigations, Continuous Vetting, and Trusted Workforce 2.0 workflows.",
     url: "https://datasourceinc.com",
     images: [
       {

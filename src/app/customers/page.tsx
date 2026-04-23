@@ -3,12 +3,14 @@ import { customers } from "@/data/customers";
 import CustomerCycler from "@/components/customers/CustomerCycler2";
 
 export const metadata: Metadata = {
-  title: "Customers",
+  title: "Federal Agencies Using ABIS",
   description:
-    "Federal agencies that rely on DataSource's ABIS platform for Personnel Security workflows.",
+    "Federal agencies — IRS, SBA, USITC, CFPB, FRB, LOC, GSA and more — rely on DataSource's ABIS platform to run Personnel Security and background investigation workflows.",
   alternates: { canonical: "/customers" },
   openGraph: {
-    title: "Customers | DataSource Inc.",
+    title: "Federal Agencies Using ABIS | DataSource Inc.",
+    description:
+      "Federal agencies — IRS, SBA, USITC, CFPB, FRB, LOC, GSA and more — rely on DataSource's ABIS platform to run Personnel Security and background investigation workflows.",
     url: "https://datasourceinc.com/customers",
   },
 };

@@ -2,12 +2,16 @@ import type { Metadata } from "next";
 import StatCard from "@/components/ui/StatCard";
 
 export const metadata: Metadata = {
-  title: "Why ABIS",
+  title: {
+    absolute: "Why ABIS: Federal Personnel Security Software | DataSource",
+  },
   description:
-    "How ABIS streamlines Personnel Security operations for Federal agencies — built on 20+ years of direct experience supporting PS offices.",
+    "ABIS automates Federal Personnel Security workflows — background investigations, Continuous Vetting, adjudication, and Trusted Workforce 2.0 — built on 20+ years of PS expertise.",
   alternates: { canonical: "/why-abis" },
   openGraph: {
-    title: "Why ABIS | DataSource Inc.",
+    title: "Why ABIS: Federal Personnel Security Software | DataSource",
+    description:
+      "ABIS automates Federal Personnel Security workflows — background investigations, Continuous Vetting, adjudication, and Trusted Workforce 2.0 — built on 20+ years of PS expertise.",
     url: "https://datasourceinc.com/why-abis",
   },
 };

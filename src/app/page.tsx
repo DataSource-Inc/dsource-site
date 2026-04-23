@@ -6,7 +6,7 @@ import ArchitectureSection from "@/components/home/ArchitectureSection";
 
 export const metadata: Metadata = {
   title: {
-    absolute: "ABIS Personnel Security Platform | DataSource Inc.",
+    absolute: "ABIS Personnel Security Software | DataSource Inc.",
   },
   alternates: { canonical: "/" },
 };
