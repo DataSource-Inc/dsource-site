@@ -1,5 +1,17 @@
+import type { Metadata } from "next";
 import { customers } from "@/data/customers";
 import CustomerCycler from "@/components/customers/CustomerCycler2";
+
+export const metadata: Metadata = {
+  title: "Customers",
+  description:
+    "Federal agencies that rely on DataSource's ABIS platform for Personnel Security workflows.",
+  alternates: { canonical: "/customers" },
+  openGraph: {
+    title: "Customers | DataSource Inc.",
+    url: "https://datasourceinc.com/customers",
+  },
+};
 
 const supportItems = [
   {

@@ -1,5 +1,17 @@
+import type { Metadata } from "next";
 import Image from "next/image";
 import RequestForm from "@/components/contact/RequestForm";
+
+export const metadata: Metadata = {
+  title: "Contact Us",
+  description:
+    "Get in touch with DataSource to learn more about the ABIS Personnel Security platform.",
+  alternates: { canonical: "/contact" },
+  openGraph: {
+    title: "Contact Us | DataSource Inc.",
+    url: "https://datasourceinc.com/contact",
+  },
+};
 
 /* ── Inline SVG icons for contact info ── */
 

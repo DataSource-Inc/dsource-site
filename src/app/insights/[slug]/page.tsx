@@ -19,6 +19,12 @@ export async function generateMetadata({
   return {
     title: `${insight.title} | DataSource Inc.`,
     description: insight.excerpt,
+    alternates: { canonical: `/insights/${slug}` },
+    openGraph: {
+      title: `${insight.title} | DataSource Inc.`,
+      description: insight.excerpt,
+      url: `https://datasourceinc.com/insights/${slug}`,
+    },
   };
 }
 

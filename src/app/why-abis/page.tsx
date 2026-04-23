@@ -1,4 +1,16 @@
+import type { Metadata } from "next";
 import StatCard from "@/components/ui/StatCard";
+
+export const metadata: Metadata = {
+  title: "Why ABIS",
+  description:
+    "How ABIS streamlines Personnel Security operations for Federal agencies — built on 20+ years of direct experience supporting PS offices.",
+  alternates: { canonical: "/why-abis" },
+  openGraph: {
+    title: "Why ABIS | DataSource Inc.",
+    url: "https://datasourceinc.com/why-abis",
+  },
+};
 
 const stats = [
   {
