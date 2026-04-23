@@ -1,9 +1,14 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Privacy Policy | DataSource Inc.",
+  title: "Privacy Policy",
   description:
     "DataSource is committed to protecting your privacy. Read our Privacy Policy to learn how we collect, use, and protect your personal information.",
+  alternates: { canonical: "/privacy-policy" },
+  openGraph: {
+    title: "Privacy Policy | DataSource Inc.",
+    url: "https://datasourceinc.com/privacy-policy",
+  },
 };
 
 const sections = [

@@ -25,7 +25,7 @@ export default function Footer() {
         </Link>
 
         {/* Desktop: single row of links + LinkedIn */}
-        <nav className="hidden items-center gap-14 md:flex">
+        <nav aria-label="Footer" className="hidden items-center gap-14 md:flex">
           {NAV_LINKS.map(({ href, label }) => (
             <Link
               key={href}

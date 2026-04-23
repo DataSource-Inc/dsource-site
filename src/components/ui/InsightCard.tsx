@@ -36,12 +36,14 @@ export default function InsightCard({
         <img
           src={icon}
           alt=""
+          aria-hidden="true"
           className="h-full w-auto transition-opacity duration-300 group-hover:opacity-0"
         />
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src={hoverIcon}
           alt=""
+          aria-hidden="true"
           className="absolute inset-0 m-auto h-full w-auto opacity-0 transition-opacity duration-300 group-hover:opacity-100"
         />
       </div>

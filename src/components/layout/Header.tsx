@@ -35,7 +35,7 @@ export default function Header() {
           </Link>
 
           {/* Desktop Nav */}
-          <nav className="hidden items-center gap-14 md:flex">
+          <nav aria-label="Primary" className="hidden items-center gap-14 md:flex">
             {NAV_LINKS.map(({ href, label }) => {
               const isActive =
                 href === "/" ? pathname === "/" : pathname.startsWith(href);
@@ -61,7 +61,9 @@ export default function Header() {
             type="button"
             className="flex items-center justify-center md:hidden"
             onClick={() => setMobileMenuOpen(true)}
-            aria-label="Open menu"
+            aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
+            aria-expanded={mobileMenuOpen}
+            aria-controls="mobile-menu"
           >
             <svg
               width="32"
