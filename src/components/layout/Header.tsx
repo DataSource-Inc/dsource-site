@@ -35,7 +35,7 @@ export default function Header() {
           </Link>
 
           {/* Desktop Nav */}
-          <nav className="hidden items-center gap-14 md:flex">
+          <nav aria-label="Primary" className="hidden items-center gap-14 md:flex">
             {NAV_LINKS.map(({ href, label }) => {
               const isActive =
                 href === "/" ? pathname === "/" : pathname.startsWith(href);
