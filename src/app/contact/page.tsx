@@ -13,7 +13,7 @@ export const metadata: Metadata = {
     title: "Contact DataSource — ABIS Personnel Security Software",
     description:
       "Request a demo or ask about ABIS, DataSource's Personnel Security software for Federal background investigations, adjudication, and Continuous Vetting.",
-    url: "https://datasourceinc.com/contact",
+    url: "https://www.datasourceinc.com/contact",
   },
 };
 

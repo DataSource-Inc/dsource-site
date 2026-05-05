@@ -1,7 +1,7 @@
 import type { MetadataRoute } from "next";
 import { insights } from "@/data/insights";
 
-const BASE_URL = "https://datasourceinc.com";
+const BASE_URL = "https://www.datasourceinc.com";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const staticRoutes: MetadataRoute.Sitemap = [

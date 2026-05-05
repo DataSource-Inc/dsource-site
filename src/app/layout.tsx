@@ -6,7 +6,7 @@ import ScrollToTop from "@/components/ScrollToTop";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://datasourceinc.com"),
+  metadataBase: new URL("https://www.datasourceinc.com"),
   title: {
     default: "ABIS Personnel Security Software | DataSource Inc.",
     template: "%s | DataSource Inc.",
@@ -22,7 +22,7 @@ export const metadata: Metadata = {
     title: "ABIS Personnel Security Software | DataSource Inc.",
     description:
       "ABIS by DataSource is Personnel Security software for Federal agencies — automating background investigations, Continuous Vetting, and Trusted Workforce 2.0 workflows.",
-    url: "https://datasourceinc.com",
+    url: "https://www.datasourceinc.com",
     images: [
       {
         url: "/dsource-logo.png",
