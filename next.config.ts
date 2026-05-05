@@ -2,6 +2,11 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   output: "standalone",
+  images: {
+    formats: ["image/avif", "image/webp"],
+    imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
+    qualities: [55, 75],
+  },
 };
 
 export default nextConfig;
