@@ -23,7 +23,7 @@ export async function generateMetadata({
     openGraph: {
       title: `${insight.title} | DataSource Inc.`,
       description: insight.excerpt,
-      url: `https://datasourceinc.com/insights/${slug}`,
+      url: `https://www.datasourceinc.com/insights/${slug}`,
     },
   };
 }

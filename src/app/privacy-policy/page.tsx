@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   alternates: { canonical: "/privacy-policy" },
   openGraph: {
     title: "Privacy Policy | DataSource Inc.",
-    url: "https://datasourceinc.com/privacy-policy",
+    url: "https://www.datasourceinc.com/privacy-policy",
   },
 };
 

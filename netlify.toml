@@ -7,3 +7,9 @@
 
 [[plugins]]
   package = "@netlify/plugin-nextjs"
+
+[[redirects]]
+  from = "https://datasourceinc.com/*"
+  to = "https://www.datasourceinc.com/:splat"
+  status = 301
+  force = true
