@@ -2,6 +2,12 @@ import { insights } from "@/data/insights";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import InsightCard from "@/components/ui/InsightCard";
+import {
+  articleSchema,
+  breadcrumbSchema,
+  jsonLd,
+  SITE_URL,
+} from "@/lib/structured-data";
 
 export function generateStaticParams() {
   return insights.map((insight) => ({ slug: insight.slug }));
@@ -39,8 +45,22 @@ export default async function InsightPage({
 
   const otherInsights = insights.filter((i) => i.slug !== slug);
 
+  const article = articleSchema({
+    title: insight.title,
+    description: insight.excerpt,
+    slug: insight.slug,
+    datePublished: insight.datePublished,
+    dateModified: insight.dateModified,
+  });
+  const breadcrumb = breadcrumbSchema([
+    { name: "Home", url: `${SITE_URL}/` },
+    { name: insight.title, url: `${SITE_URL}/insights/${insight.slug}` },
+  ]);
+
   return (
     <section className="bg-light">
+      <script type="application/ld+json" dangerouslySetInnerHTML={jsonLd(article)} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={jsonLd(breadcrumb)} />
       {/* Article Header & Content */}
       <div className="mx-auto max-w-[1200px] px-10 max-md:px-4 pt-14 pb-20 max-md:pt-10 max-md:pb-14">
         {/* Centered Article Content */}
