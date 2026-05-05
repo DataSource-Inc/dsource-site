@@ -1,7 +1,7 @@
 'use client';
 
 import Image from "next/image";
-import { useState, useCallback, useRef } from "react";
+import { useState, useCallback } from "react";
 import { LazyMotion, domAnimation, m } from "framer-motion";
 import Button from "@/components/ui/Button";
 
@@ -46,17 +46,12 @@ function fadeIn(phase: Phase, ready: boolean, custom?: { initial: AnimState; ani
   return { initial, animate: ready ? animate : initial, transition: { delay, duration, ease } };
 }
 
-// Images that must load before animations start
-const HERO_IMAGES = ["/abis-logo.png", "/hero-dots.webp"] as const;
-
 export default function HeroSection() {
   const [ready, setReady] = useState(false);
-  const loadedRef = useRef(0);
 
-  const handleImageLoad = useCallback(() => {
-    loadedRef.current += 1;
-    if (loadedRef.current >= HERO_IMAGES.length) setReady(true);
-  }, []);
+  // Gate animations on the always-visible logo only. The decorative dots
+  // are display:none on mobile, so their onLoad never fires there.
+  const handleLogoLoad = useCallback(() => setReady(true), []);
 
   return (
     <LazyMotion features={domAnimation} strict>
@@ -74,7 +69,6 @@ export default function HeroSection() {
           quality={55}
           sizes="(max-width: 768px) 0px, 50vw"
           className="object-contain"
-          onLoad={handleImageLoad}
         />
       </m.div>
       {/* Decorative dotted world map - right side (mirrored) */}
@@ -118,7 +112,7 @@ export default function HeroSection() {
                 priority
                 sizes="(max-width: 768px) 161px, 240px"
                 className="max-md:w-[161px] max-md:h-auto"
-                onLoad={handleImageLoad}
+                onLoad={handleLogoLoad}
               />
             </m.div>
 
