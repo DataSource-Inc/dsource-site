@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { useState, useCallback, useRef } from "react";
-import { motion } from "framer-motion";
+import { LazyMotion, domAnimation, m } from "framer-motion";
 import Button from "@/components/ui/Button";
 
 // ── Timing config ──
@@ -47,7 +47,7 @@ function fadeIn(phase: Phase, ready: boolean, custom?: { initial: AnimState; ani
 }
 
 // Images that must load before animations start
-const HERO_IMAGES = ["/abis-logo.png", "/hero-dots.png"] as const;
+const HERO_IMAGES = ["/abis-logo.png", "/hero-dots.webp"] as const;
 
 export default function HeroSection() {
   const [ready, setReady] = useState(false);
@@ -59,24 +59,26 @@ export default function HeroSection() {
   }, []);
 
   return (
+    <LazyMotion features={domAnimation} strict>
     <section className="relative  overflow-hidden">
       {/* Decorative dotted world map - left side */}
-      <motion.div
+      <m.div
         {...fadeIn('dots', ready)}
         className="absolute left-[-26%] top-[35%] w-[50%] h-[55%] pointer-events-none max-md:hidden"
         aria-hidden="true"
       >
         <Image
-          src="/hero-dots.png"
+          src="/hero-dots.webp"
           alt=""
           fill
-          priority
+          quality={55}
+          sizes="(max-width: 768px) 0px, 50vw"
           className="object-contain"
           onLoad={handleImageLoad}
         />
-      </motion.div>
+      </m.div>
       {/* Decorative dotted world map - right side (mirrored) */}
-      <motion.div
+      <m.div
         {...fadeIn('dots', ready, {
           initial: { opacity: 0, x: -80 },
           animate: { opacity: 0.6, x: 0 },
@@ -85,41 +87,43 @@ export default function HeroSection() {
         aria-hidden="true"
       >
         <Image
-          src="/hero-dots.png"
+          src="/hero-dots.webp"
           alt=""
           fill
-          priority
+          quality={55}
+          sizes="(max-width: 768px) 0px, 50vw"
           className="object-contain"
         />
-      </motion.div>
+      </m.div>
 
       <div className="mx-auto max-w-[1200px] px-10 max-md:px-4 pt-14 pb-20 max-md:pt-10 max-md:pb-14">
         <div className="flex flex-col items-center text-center max-w-[987px] mx-auto gap-[52px] max-md:gap-10">
           {/* Main heading */}
-          <motion.h1
+          <m.h1
             {...fadeIn('heading', ready)}
             className="text-h1 text-primary-80 tracking-[-1.28px] max-md:text-[32px] max-md:leading-[1.2]"
           >
             Take the Heavy Lifting out of Trusted Workforce with ABIS
-          </motion.h1>
+          </m.h1>
 
           {/* ABIS logo + subtitle block */}
           <div className="flex flex-col items-center gap-16 max-md:gap-10">
             {/* ABIS Logo */}
-            <motion.div {...fadeIn('logo', ready)}>
+            <m.div {...fadeIn('logo', ready)}>
               <Image
                 src="/abis-logo.png"
                 alt="ABIS Personnel Security"
                 width={240}
                 height={86}
                 priority
+                sizes="(max-width: 768px) 161px, 240px"
                 className="max-md:w-[161px] max-md:h-auto"
                 onLoad={handleImageLoad}
               />
-            </motion.div>
+            </m.div>
 
             {/* Subtitle area */}
-            <motion.div
+            <m.div
               {...fadeIn('subtext', ready)}
               className="flex flex-col items-center gap-8 max-md:gap-6"
             >
@@ -137,17 +141,18 @@ export default function HeroSection() {
                 automates every Personnel Security-specific task for Federal
                 agencies.
               </p>
-            </motion.div>
+            </m.div>
           </div>
 
           {/* CTA Button */}
-          <motion.div {...fadeIn('subtext', ready)}>
+          <m.div {...fadeIn('subtext', ready)}>
             <Button href="/contact" className="w-[285px] justify-between max-md:w-full">
               Request a Demo
             </Button>
-          </motion.div>
+          </m.div>
         </div>
       </div>
     </section>
+    </LazyMotion>
   );
 }
