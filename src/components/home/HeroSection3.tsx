@@ -67,7 +67,7 @@ export default function HeroSection() {
           alt=""
           fill
           quality={40}
-          sizes="(max-width: 768px) 0px, 50vw"
+          sizes="(max-width: 768px) 0px, 49vw"
           className="object-contain"
         />
       </m.div>
@@ -85,7 +85,7 @@ export default function HeroSection() {
           alt=""
           fill
           quality={40}
-          sizes="(max-width: 768px) 0px, 50vw"
+          sizes="(max-width: 768px) 0px, 49vw"
           className="object-contain"
         />
       </m.div>
