@@ -1,7 +1,7 @@
 'use client';
 
 import Image from "next/image";
-import { useState, useCallback } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { LazyMotion, domAnimation, m } from "framer-motion";
 import Button from "@/components/ui/Button";
 
@@ -17,7 +17,6 @@ type Phase = keyof typeof TIMING;
 
 type AnimState = { opacity: number; scale?: number; x?: number; y?: number };
 
-/** Returns `initial` and `transition` props for a given phase, plus an `animate` value gated on `ready`. */
 function fadeIn(phase: Phase, ready: boolean, custom?: { initial: AnimState; animate: AnimState }) {
   const { delay, duration } = TIMING[phase];
   const ease = [0.25, 0.1, 0.25, 1] as const;
@@ -47,18 +46,20 @@ function fadeIn(phase: Phase, ready: boolean, custom?: { initial: AnimState; ani
 }
 
 export default function HeroSection() {
-  const [ready, setReady] = useState(false);
+  // contentReady gates text/CTA — fires after hydration so LCP element (h1) is never blocked by an image download.
+  // logoReady gates the logo + decorative dots, gated on logo onLoad so dots don't animate before layout settles.
+  const [contentReady, setContentReady] = useState(false);
+  const [logoReady, setLogoReady] = useState(false);
 
-  // Gate animations on the always-visible logo only. The decorative dots
-  // are display:none on mobile, so their onLoad never fires there.
-  const handleLogoLoad = useCallback(() => setReady(true), []);
+  useEffect(() => setContentReady(true), []);
+  const handleLogoLoad = useCallback(() => setLogoReady(true), []);
 
   return (
     <LazyMotion features={domAnimation} strict>
     <section className="relative  overflow-hidden">
       {/* Decorative dotted world map - left side */}
       <m.div
-        {...fadeIn('dots', ready)}
+        {...fadeIn('dots', logoReady)}
         className="absolute left-[-26%] top-[35%] w-[50%] h-[55%] pointer-events-none max-md:hidden"
         aria-hidden="true"
       >
@@ -73,7 +74,7 @@ export default function HeroSection() {
       </m.div>
       {/* Decorative dotted world map - right side (mirrored) */}
       <m.div
-        {...fadeIn('dots', ready, {
+        {...fadeIn('dots', logoReady, {
           initial: { opacity: 0, x: -80 },
           animate: { opacity: 0.6, x: 0 },
         })}
@@ -94,7 +95,7 @@ export default function HeroSection() {
         <div className="flex flex-col items-center text-center max-w-[987px] mx-auto gap-[52px] max-md:gap-10">
           {/* Main heading */}
           <m.h1
-            {...fadeIn('heading', ready)}
+            {...fadeIn('heading', contentReady)}
             className="text-h1 text-primary-80 tracking-[-1.28px] max-md:text-[32px] max-md:leading-[1.2]"
           >
             Take the Heavy Lifting out of Trusted Workforce with ABIS
@@ -103,7 +104,7 @@ export default function HeroSection() {
           {/* ABIS logo + subtitle block */}
           <div className="flex flex-col items-center gap-16 max-md:gap-10">
             {/* ABIS Logo */}
-            <m.div {...fadeIn('logo', ready)}>
+            <m.div {...fadeIn('logo', logoReady)}>
               <Image
                 src="/abis-logo.png"
                 alt="ABIS Personnel Security"
@@ -118,7 +119,7 @@ export default function HeroSection() {
 
             {/* Subtitle area */}
             <m.div
-              {...fadeIn('subtext', ready)}
+              {...fadeIn('subtext', contentReady)}
               className="flex flex-col items-center gap-8 max-md:gap-6"
             >
               {/* Tag pill */}
@@ -139,7 +140,7 @@ export default function HeroSection() {
           </div>
 
           {/* CTA Button */}
-          <m.div {...fadeIn('subtext', ready)}>
+          <m.div {...fadeIn('subtext', contentReady)}>
             <Button href="/contact" className="w-[285px] justify-between max-md:w-full">
               Request a Demo
             </Button>
