@@ -66,7 +66,7 @@ export default function HeroSection() {
           src="/hero-dots.webp"
           alt=""
           fill
-          quality={55}
+          quality={40}
           sizes="(max-width: 768px) 0px, 50vw"
           className="object-contain"
         />
@@ -84,7 +84,7 @@ export default function HeroSection() {
           src="/hero-dots.webp"
           alt=""
           fill
-          quality={55}
+          quality={40}
           sizes="(max-width: 768px) 0px, 50vw"
           className="object-contain"
         />
