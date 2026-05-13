@@ -1,5 +1,6 @@
 'use client';
 
+import Image from "next/image";
 import { useState } from "react";
 
 interface VideoEmbedProps {
@@ -31,15 +32,12 @@ export default function VideoEmbed({ videoId, title }: VideoEmbedProps) {
       aria-label={`Play video: ${title}`}
       className="group relative aspect-video w-full overflow-hidden rounded-2xl bg-black"
     >
-      <img
+      <Image
         src={`https://i.ytimg.com/vi/${videoId}/maxresdefault.jpg`}
         alt=""
-        loading="lazy"
-        decoding="async"
-        className="absolute inset-0 h-full w-full object-cover"
-        onError={(e) => {
-          (e.currentTarget as HTMLImageElement).src = `https://i.ytimg.com/vi/${videoId}/hqdefault.jpg`;
-        }}
+        fill
+        sizes="(max-width: 768px) 100vw, 773px"
+        className="object-cover"
       />
       <span
         aria-hidden="true"
