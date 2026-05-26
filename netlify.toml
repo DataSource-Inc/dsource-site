@@ -13,3 +13,142 @@
   to = "https://www.datasourceinc.com/:splat"
   status = 301
   force = true
+
+# Legacy .html URLs -> new routes (preserve ranking equity from the old site)
+
+# ABIS product pages hold the existing rankings for "automated background
+# investigation system" — point them at the new ABIS page.
+[[redirects]]
+  from = "/products/abis.html"
+  to = "/why-abis"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/products/products.html"
+  to = "/why-abis"
+  status = 301
+  force = true
+
+# Direct content matches
+[[redirects]]
+  from = "/about-us/privacy-policy.html"
+  to = "/privacy-policy"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/contact-us/contact-information.html"
+  to = "/contact"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/contact-us/directions.html"
+  to = "/contact"
+  status = 301
+  force = true
+
+# Clients -> Customers
+[[redirects]]
+  from = "/clients/our-clients.html"
+  to = "/customers"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/clients/contract-vehicles.html"
+  to = "/customers"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/clients/project-summaries.html"
+  to = "/customers"
+  status = 301
+  force = true
+
+# Pages with no equivalent on the new site -> home
+[[redirects]]
+  from = "/index.html"
+  to = "/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/about-us/about-us.html"
+  to = "/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/products/abri.html"
+  to = "/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/products/pipeliner.html"
+  to = "/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/products/aim.html"
+  to = "/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/services/services.html"
+  to = "/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/services/project-outsourcing.html"
+  to = "/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/services/professional-services.html"
+  to = "/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/seaport-e/task-orders.html"
+  to = "/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/seaport-e/team-members.html"
+  to = "/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/seaport-e/quality-assurance.html"
+  to = "/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/seaport-e/customer-satisfaction.html"
+  to = "/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/careers/careers.html"
+  to = "/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/careers/open-positions.html"
+  to = "/"
+  status = 301
+  force = true
