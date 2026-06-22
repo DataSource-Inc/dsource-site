@@ -7,6 +7,7 @@ import {
 import path from "path";
 import { buildConfig } from "payload";
 import { cloudinaryStorage } from "payload-cloudinary";
+import sharp from "sharp";
 import { fileURLToPath } from "url";
 
 import { BlogPosts } from "@/collections/BlogPosts";
@@ -72,6 +73,7 @@ export default buildConfig({
     }),
   ],
   secret: process.env.PAYLOAD_SECRET || "local-development-secret",
+  sharp,
   typescript: {
     outputFile: path.resolve(dirname, "payload-types.ts"),
   },
