@@ -1,21 +1,9 @@
+import { insights } from "@/data/insights";
 import { notFound } from "next/navigation";
-import { draftMode } from "next/headers";
+import Link from "next/link";
 import InsightCard from "@/components/ui/InsightCard";
-import ArticleBody from "@/components/cms/ArticleBody";
-import CMSImage from "@/components/cms/CMSImage";
-import { getCachedInsight, getCachedInsights } from "@/lib/payload/cache";
-import { getMediaURL } from "@/lib/payload/media";
-import { fetchInsightBySlug } from "@/lib/payload/queries";
 
-const FALLBACK_ICONS = [
-  "/insights/icon-1.svg",
-  "/insights/icon-2.svg",
-  "/insights/icon-3.svg",
-  "/insights/icon-4.svg",
-];
-
-export async function generateStaticParams() {
-  const insights = await getCachedInsights();
+export function generateStaticParams() {
   return insights.map((insight) => ({ slug: insight.slug }));
 }
 
@@ -25,24 +13,17 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const { isEnabled: draft } = await draftMode();
-  const insight = draft
-    ? await fetchInsightBySlug(slug, true)
-    : await getCachedInsight(slug);
+  const insight = insights.find((i) => i.slug === slug);
   if (!insight) return {};
 
   return {
-    title: `${insight.meta?.title || insight.title} | DataSource Inc.`,
-    description: insight.meta?.description || insight.excerpt,
+    title: `${insight.title} | DataSource Inc.`,
+    description: insight.excerpt,
     alternates: { canonical: `/insights/${slug}` },
     openGraph: {
-      title: `${insight.meta?.title || insight.title} | DataSource Inc.`,
-      description: insight.meta?.description || insight.excerpt,
+      title: `${insight.title} | DataSource Inc.`,
+      description: insight.excerpt,
       url: `https://datasourceinc.com/insights/${slug}`,
-      images:
-        insight.meta?.image && typeof insight.meta.image !== "string"
-          ? [{ url: getMediaURL(insight.meta.image) }]
-          : undefined,
     },
   };
 }
@@ -53,15 +34,10 @@ export default async function InsightPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const { isEnabled: draft } = await draftMode();
-  const insight = draft
-    ? await fetchInsightBySlug(slug, true)
-    : await getCachedInsight(slug);
+  const insight = insights.find((i) => i.slug === slug);
   if (!insight) notFound();
 
-  const allInsights = await getCachedInsights();
-  const otherInsights = allInsights.filter((i) => i.slug !== slug);
-  const icon = getMediaURL(insight.cardIcon, "card");
+  const otherInsights = insights.filter((i) => i.slug !== slug);
 
   return (
     <section className="bg-light">
@@ -75,6 +51,7 @@ export default async function InsightPage({
               {insight.title}
             </h1>
 
+            {/* Icon / Illustration Area */}
             <div className="mt-16 max-md:mt-10 bg-beige rounded-lg relative h-[180px] overflow-hidden">
               {/* Decorative geometric lines */}
               {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -98,28 +75,37 @@ export default async function InsightPage({
                 className="absolute left-[-267px] top-[-218px] w-[571px] h-[646px] -rotate-[120deg] pointer-events-none"
                 aria-hidden="true"
               />
-              {icon && (
-                // eslint-disable-next-line @next/next/no-img-element
-                <img
-                  src={icon}
-                  alt=""
-                  className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 h-[135px] w-auto"
-                />
-              )}
+              {/* Icon */}
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={insight.icon}
+                alt=""
+                className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 h-[135px] w-auto"
+              />
             </div>
 
-            {insight.featuredImage && typeof insight.featuredImage !== "string" && (
-              <CMSImage
-                className="mt-10 h-auto w-full rounded-lg"
-                media={insight.featuredImage}
-                priority
-                size="hero"
-              />
-            )}
-
             {/* Article Body */}
-            <div className="mt-16 max-md:mt-10">
-              <ArticleBody content={insight.content} />
+            <div className="mt-16 max-md:mt-10 flex flex-col gap-8">
+              {insight.sections.map((section, index) => (
+                <div key={index} className="flex flex-col gap-4">
+                  <h2 className="text-h5 text-primary-80">
+                    {section.heading}
+                  </h2>
+                  {section.image && (
+                    // eslint-disable-next-line @next/next/no-img-element
+                    <img
+                      src={section.image}
+                      alt={section.heading}
+                      className="w-full rounded-lg"
+                    />
+                  )}
+                  {section.body && (
+                    <p className="text-body-1 text-gray-100 leading-[1.6]">
+                      {section.body}
+                    </p>
+                  )}
+                </div>
+              ))}
             </div>
           </div>
         </div>
@@ -132,12 +118,12 @@ export default async function InsightPage({
         </h2>
 
         <div className="mt-10 grid grid-cols-3 max-md:grid-cols-1 gap-3">
-          {otherInsights.map((other, index) => (
+          {otherInsights.map((other) => (
             <InsightCard
               key={other.slug}
               title={other.title}
               slug={other.slug}
-              icon={getMediaURL(other.cardIcon, "card") || FALLBACK_ICONS[index % FALLBACK_ICONS.length]}
+              icon={other.icon}
             />
           ))}
         </div>

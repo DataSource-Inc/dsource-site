@@ -2,9 +2,11 @@
 
 > **For agentic workers:** REQUIRED: Use superpowers:subagent-driven-development (if subagents available) or superpowers:executing-plans to implement this plan. Steps use checkbox (`- [ ]`) syntax for tracking.
 
-**Goal:** Add Payload CMS to the existing DataSource Next site so editors can manage blog posts, insight articles, and article media without code changes.
+**Current scope note:** Insights are intentionally static again. Do not convert `src/data/insights.ts`, the homepage insights grid, or `/insights/[slug]` to Payload without a new explicit product decision.
 
-**Architecture:** Payload runs inside the existing Next app under an `(payload)` route group. Public pages keep fixed DataSource templates and fetch published CMS content through a small server-only query layer with draft-mode bypass and ISR-style cache invalidation. Railway hosts the app and MongoDB databases; Cloudinary stores and delivers uploaded media through the community `payload-cloudinary` adapter.
+**Goal:** Add Payload CMS to the existing DataSource Next site so editors can manage blog posts and article media without code changes.
+
+**Architecture:** Payload runs inside the existing Next app under an `(payload)` route group. Blog pages keep fixed DataSource templates and fetch published CMS content through a small server-only query layer with draft-mode bypass and ISR-style cache invalidation. Railway hosts the app and MongoDB databases; Cloudinary stores and delivers uploaded media through the community `payload-cloudinary` adapter. Insights remain hard-coded with static logos/assets.
 
 **Tech Stack:** Next.js App Router, React, TypeScript, pnpm, Payload CMS 3, Railway MongoDB, Cloudinary, `@payloadcms/db-mongodb`, `@payloadcms/richtext-lexical`, `payload-cloudinary`, `@payloadcms/plugin-seo`, Next `unstable_cache`, `revalidatePath`, `draftMode`.
 
@@ -29,8 +31,7 @@ Create or modify these areas:
 - `src/app/(frontend)/api/preview/route.ts`: draft preview entrypoint.
 - `src/app/(frontend)/api/exit-preview/route.ts`: draft preview exit.
 - `src/collections/Users.ts`: auth users/admins/authors.
-- `src/collections/Media.ts`: R2-backed upload collection.
-- `src/collections/Insights.ts`: editable version of existing insight articles.
+- `src/collections/Media.ts`: Cloudinary-backed upload collection.
 - `src/collections/BlogPosts.ts`: new blog post collection.
 - `src/collections/Categories.ts`: blog categories, if useful in the UI.
 - `src/access/isAdmin.ts`: admin write access helper.
@@ -46,12 +47,9 @@ Create or modify these areas:
 - `src/components/cms/RichText.tsx`: minimal Lexical renderer.
 - `src/components/cms/CMSImage.tsx`: media renderer around `next/image`.
 - `src/components/cms/ArticleBody.tsx`: shared article body renderer.
-- `src/app/insights/[slug]/page.tsx`: switch from static data to Payload.
-- `src/components/home/InsightsSection.tsx`: switch from hardcoded insight cards to Payload data.
 - `src/app/blog/page.tsx`: new blog index.
 - `src/app/blog/[slug]/page.tsx`: new blog detail.
-- `src/app/sitemap.ts`: include CMS-backed insight and blog routes.
-- `src/scripts/seedInsights.ts`: seed existing insight content into Payload.
+- `src/app/sitemap.ts`: include static insight and CMS-backed blog routes.
 - `src/scripts/seedAdmin.ts`: optional first admin helper for development.
 - `src/payload-types.ts`: generated Payload types.
 - `src/app/(payload)/admin/importMap.js`: generated Payload import map.

@@ -1,11 +1,11 @@
-import { blogPostPath, insightPath } from "@/lib/payload/paths";
+import { blogPostPath } from "@/lib/payload/paths";
 
 type PreviewDocument = {
   slug?: string | null;
 };
 
 export function formatPreviewURL(
-  collection: "blog-posts" | "insights",
+  collection: "blog-posts",
   doc: PreviewDocument,
 ): string {
   const baseURL =
@@ -14,7 +14,7 @@ export function formatPreviewURL(
     "http://localhost:3000";
   const secret = process.env.NEXT_PRIVATE_DRAFT_SECRET || "";
   const slug = doc.slug || "";
-  const path = collection === "insights" ? insightPath(slug) : blogPostPath(slug);
+  const path = blogPostPath(slug);
 
   return `${baseURL}/api/preview?secret=${encodeURIComponent(
     secret,

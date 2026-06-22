@@ -1,17 +1,12 @@
 import type { MetadataRoute } from "next";
 
-import {
-  fetchPublishedBlogPosts,
-  fetchPublishedInsights,
-} from "@/lib/payload/queries";
+import { insights } from "@/data/insights";
+import { fetchPublishedBlogPosts } from "@/lib/payload/queries";
 
 const BASE_URL = "https://datasourceinc.com";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const [insights, blogPosts] = await Promise.all([
-    fetchPublishedInsights(),
-    fetchPublishedBlogPosts(),
-  ]);
+  const blogPosts = await fetchPublishedBlogPosts();
 
   const staticRoutes: MetadataRoute.Sitemap = [
     "",
@@ -27,7 +22,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   const insightRoutes: MetadataRoute.Sitemap = insights.map((insight) => ({
     url: `${BASE_URL}/insights/${insight.slug}`,
-    lastModified: new Date(insight.updatedAt),
+    lastModified: new Date(),
   }));
 
   const blogRoutes: MetadataRoute.Sitemap = blogPosts.map((post) => ({

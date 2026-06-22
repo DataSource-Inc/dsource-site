@@ -3,7 +3,7 @@ import "server-only";
 import config from "@payload-config";
 import { getPayload } from "payload";
 
-import type { BlogPost, Insight } from "@/payload-types";
+import type { BlogPost } from "@/payload-types";
 import type { Where } from "payload";
 
 const hasDatabase = Boolean(process.env.DATABASE_URI);
@@ -42,57 +42,6 @@ function publishedWhere(slug?: string): Where {
   });
 
   return { and };
-}
-
-export async function fetchPublishedInsights(): Promise<Insight[]> {
-  const payload = await getPayloadClient();
-  if (!payload) return [];
-
-  const result = await payload.find({
-    collection: "insights",
-    depth: 2,
-    limit: 100,
-    sort: ["displayOrder", "-publishedAt"],
-    where: publishedWhere(),
-  });
-
-  return result.docs;
-}
-
-export async function fetchPublishedInsightSlugs(): Promise<Pick<Insight, "slug">[]> {
-  const payload = await getPayloadClient();
-  if (!payload) return [];
-
-  const result = await payload.find({
-    collection: "insights",
-    depth: 0,
-    limit: 300,
-    select: {
-      slug: true,
-    },
-    where: publishedWhere(),
-  });
-
-  return result.docs;
-}
-
-export async function fetchInsightBySlug(
-  slug: string,
-  draft = false,
-): Promise<Insight | null> {
-  const payload = await getPayloadClient();
-  if (!payload) return null;
-
-  const result = await payload.find({
-    collection: "insights",
-    depth: 2,
-    draft,
-    limit: 1,
-    overrideAccess: draft,
-    where: draft ? slugWhere(slug) : publishedWhere(slug),
-  });
-
-  return result.docs[0] || null;
 }
 
 export async function fetchPublishedBlogPosts(): Promise<BlogPost[]> {

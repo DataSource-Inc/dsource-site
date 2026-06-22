@@ -14,9 +14,8 @@ export default function InsightCard({
   icon,
   horizontalOnMobile = false,
 }: InsightCardProps) {
-  const hoverIcon = icon.includes("/insights/")
-    ? icon.replace("/insights/", "/insights/hover/")
-    : null;
+  // Derive hover icon path: /insights/icon-1.svg -> /insights/hover/icon-1.svg
+  const hoverIcon = icon.replace("/insights/", "/insights/hover/");
 
   return (
     <Link
@@ -40,15 +39,13 @@ export default function InsightCard({
           aria-hidden="true"
           className="h-full w-auto transition-opacity duration-300 group-hover:opacity-0"
         />
-        {hoverIcon && (
-          // eslint-disable-next-line @next/next/no-img-element
-          <img
-            src={hoverIcon}
-            alt=""
-            aria-hidden="true"
-            className="absolute inset-0 m-auto h-full w-auto opacity-0 transition-opacity duration-300 group-hover:opacity-100"
-          />
-        )}
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src={hoverIcon}
+          alt=""
+          aria-hidden="true"
+          className="absolute inset-0 m-auto h-full w-auto opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+        />
       </div>
 
       {/* Title */}

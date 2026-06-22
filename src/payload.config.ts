@@ -12,7 +12,6 @@ import { fileURLToPath } from "url";
 
 import { BlogPosts } from "@/collections/BlogPosts";
 import { Categories } from "@/collections/Categories";
-import { Insights } from "@/collections/Insights";
 import { Media } from "@/collections/Media";
 import { Users } from "@/collections/Users";
 
@@ -26,7 +25,7 @@ export default buildConfig({
     },
     user: Users.slug,
   },
-  collections: [Users, Media, Categories, Insights, BlogPosts],
+  collections: [Users, Media, Categories, BlogPosts],
   cors: [
     process.env.PAYLOAD_PUBLIC_APP_URL || "",
     process.env.NEXT_PUBLIC_SITE_URL || "",
@@ -49,7 +48,7 @@ export default buildConfig({
   }),
   plugins: [
     seoPlugin({
-      collections: ["insights", "blog-posts"],
+      collections: ["blog-posts"],
       uploadsCollection: "media",
     }),
     cloudinaryStorage({

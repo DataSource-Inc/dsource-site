@@ -70,7 +70,6 @@ export interface Config {
     users: User;
     media: Media;
     categories: Category;
-    insights: Insight;
     'blog-posts': BlogPost;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
@@ -82,7 +81,6 @@ export interface Config {
     users: UsersSelect<false> | UsersSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
     categories: CategoriesSelect<false> | CategoriesSelect<true>;
-    insights: InsightsSelect<false> | InsightsSelect<true>;
     'blog-posts': BlogPostsSelect<false> | BlogPostsSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
@@ -273,50 +271,6 @@ export interface Category {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "insights".
- */
-export interface Insight {
-  id: string;
-  title: string;
-  slug: string;
-  excerpt: string;
-  content: {
-    root: {
-      type: string;
-      children: {
-        type: any;
-        version: number;
-        [k: string]: unknown;
-      }[];
-      direction: ('ltr' | 'rtl') | null;
-      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-      indent: number;
-      version: number;
-    };
-    [k: string]: unknown;
-  };
-  /**
-   * Icon or small illustration used by insight cards.
-   */
-  cardIcon?: (string | null) | Media;
-  featuredImage?: (string | null) | Media;
-  displayOrder?: number | null;
-  publishedAt: string;
-  relatedInsights?: (string | Insight)[] | null;
-  meta?: {
-    title?: string | null;
-    description?: string | null;
-    /**
-     * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
-     */
-    image?: (string | null) | Media;
-  };
-  updatedAt: string;
-  createdAt: string;
-  _status?: ('draft' | 'published') | null;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "blog-posts".
  */
 export interface BlogPost {
@@ -391,10 +345,6 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'categories';
         value: string | Category;
-      } | null)
-    | ({
-        relationTo: 'insights';
-        value: string | Insight;
       } | null)
     | ({
         relationTo: 'blog-posts';
@@ -549,31 +499,6 @@ export interface CategoriesSelect<T extends boolean = true> {
   description?: T;
   updatedAt?: T;
   createdAt?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "insights_select".
- */
-export interface InsightsSelect<T extends boolean = true> {
-  title?: T;
-  slug?: T;
-  excerpt?: T;
-  content?: T;
-  cardIcon?: T;
-  featuredImage?: T;
-  displayOrder?: T;
-  publishedAt?: T;
-  relatedInsights?: T;
-  meta?:
-    | T
-    | {
-        title?: T;
-        description?: T;
-        image?: T;
-      };
-  updatedAt?: T;
-  createdAt?: T;
-  _status?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
