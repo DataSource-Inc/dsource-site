@@ -9,7 +9,7 @@ This is a complete redesign and modernization of the DataSource Inc. corporate w
 ### Key Features
 
 - **Modern Stack**: Next.js with App Router for optimal performance and SEO
-- **Content Management**: Payload CMS for blog posts, categories, users, and media
+- **Content Management**: Payload CMS for news posts, categories, users, and media
 - **Static Insights**: Personnel Security Insights remain code-owned in `src/data/insights.ts` with static assets in `public/insights`
 - **Responsive Design**: Mobile-first approach with Tailwind CSS
 - **Server-Side Rendering**: Static site generation for fast load times

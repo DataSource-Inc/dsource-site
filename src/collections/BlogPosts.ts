@@ -25,7 +25,6 @@ export const BlogPosts: CollectionConfig = {
   },
   defaultPopulate: {
     category: true,
-    excerpt: true,
     featuredImage: true,
     publishedAt: true,
     slug: true,
@@ -38,17 +37,11 @@ export const BlogPosts: CollectionConfig = {
       required: true,
     },
     slugField(),
-    {
-      name: "excerpt",
-      type: "textarea",
-      required: true,
-    },
     richTextField(),
     {
       name: "featuredImage",
       type: "upload",
       relationTo: "media",
-      required: true,
     },
     {
       name: "authors",

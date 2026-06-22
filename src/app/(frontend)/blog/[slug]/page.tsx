@@ -39,17 +39,19 @@ export async function generateMetadata({
   const image =
     post.meta?.image && typeof post.meta.image !== "string"
       ? getMediaURL(post.meta.image)
-      : typeof post.featuredImage !== "string"
+      : post.featuredImage && typeof post.featuredImage !== "string"
         ? getMediaURL(post.featuredImage)
         : "";
+  const description =
+    post.meta?.description || `News from DataSource: ${post.title}`;
 
   return {
     title: `${post.meta?.title || post.title} | DataSource Inc.`,
-    description: post.meta?.description || post.excerpt,
+    description,
     alternates: { canonical: `/blog/${slug}` },
     openGraph: {
       title: `${post.meta?.title || post.title} | DataSource Inc.`,
-      description: post.meta?.description || post.excerpt,
+      description,
       images: image ? [{ url: image }] : undefined,
       url: `https://datasourceinc.com/blog/${slug}`,
     },
@@ -70,7 +72,7 @@ export default async function BlogPostPage({
   if (!post) notFound();
 
   return (
-    <main className="bg-light">
+    <section className="bg-light">
       <article className="mx-auto max-w-[1200px] px-10 pb-20 pt-14 max-md:px-4 max-md:pb-14 max-md:pt-10">
         <div className="mx-auto max-w-[760px]">
           <time className="text-body-1 text-gray-80">
@@ -79,12 +81,9 @@ export default async function BlogPostPage({
           <h1 className="mt-5 text-h3 text-primary-80 tracking-[-0.8px] max-md:text-[32px] max-md:leading-[1.2]">
             {post.title}
           </h1>
-          <p className="mt-6 text-big leading-[1.45] text-gray-100">
-            {post.excerpt}
-          </p>
         </div>
 
-        {typeof post.featuredImage !== "string" && (
+        {post.featuredImage && typeof post.featuredImage !== "string" && (
           <div className="mx-auto mt-12 max-w-[920px] overflow-hidden rounded-lg bg-beige">
             <CMSImage
               className="h-auto w-full"
@@ -99,6 +98,6 @@ export default async function BlogPostPage({
           <ArticleBody content={post.content} />
         </div>
       </article>
-    </main>
+    </section>
   );
 }

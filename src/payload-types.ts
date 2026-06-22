@@ -277,7 +277,6 @@ export interface BlogPost {
   id: string;
   title: string;
   slug: string;
-  excerpt: string;
   content: {
     root: {
       type: string;
@@ -293,7 +292,7 @@ export interface BlogPost {
     };
     [k: string]: unknown;
   };
-  featuredImage: string | Media;
+  featuredImage?: (string | null) | Media;
   authors?: (string | User)[] | null;
   category?: (string | null) | Category;
   publishedAt: string;
@@ -507,7 +506,6 @@ export interface CategoriesSelect<T extends boolean = true> {
 export interface BlogPostsSelect<T extends boolean = true> {
   title?: T;
   slug?: T;
-  excerpt?: T;
   content?: T;
   featuredImage?: T;
   authors?: T;
