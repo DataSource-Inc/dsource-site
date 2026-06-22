@@ -1,6 +1,6 @@
 # DataSource Inc. Website Redesign
 
-Modern, responsive website for DataSource Inc. built with Next.js 14, TypeScript, and Tailwind CSS.
+Modern, responsive website for DataSource Inc. built with Next.js, Payload CMS, TypeScript, and Tailwind CSS.
 
 ## Project Overview
 
@@ -8,7 +8,8 @@ This is a complete redesign and modernization of the DataSource Inc. corporate w
 
 ### Key Features
 
-- **Modern Stack**: Next.js 14 with App Router for optimal performance and SEO
+- **Modern Stack**: Next.js with App Router for optimal performance and SEO
+- **Content Management**: Payload CMS for insights, blog posts, categories, users, and media
 - **Responsive Design**: Mobile-first approach with Tailwind CSS
 - **Server-Side Rendering**: Static site generation for fast load times
 - **Type Safety**: Full TypeScript implementation
@@ -19,8 +20,10 @@ This is a complete redesign and modernization of the DataSource Inc. corporate w
 
 ### Prerequisites
 
-- Node.js 18.17 or higher
-- npm or yarn package manager
+- Node.js 20 or higher
+- pnpm 9 or higher
+- MongoDB database for Payload
+- Cloudinary account for CMS media uploads
 
 ### Installation
 
@@ -32,22 +35,23 @@ git clone [repository-url]
 cd dsource-site
 
 # Install dependencies
-npm install
+pnpm install
 
 # Run development server
-npm run dev
+pnpm dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) to view the site.
+Payload Admin is available at [http://localhost:3000/admin](http://localhost:3000/admin).
 
 ### Build for Production
 
 ```bash
 # Create production build
-npm run build
+pnpm build
 
 # Start production server
-npm start
+pnpm start
 ```
 
 ## Project Structure
@@ -129,16 +133,31 @@ Content from the existing site is being migrated and modernized. See `/docs/curr
 
 ## Deployment
 
-The site is configured for deployment on Vercel or any Node.js hosting platform.
+The site is configured for deployment on any Node.js hosting platform. Payload requires a persistent MongoDB database and Cloudinary for production media uploads.
 
 ### Environment Variables
 
-Create a `.env.local` file for environment-specific configuration:
+Create a `.env.local` file for environment-specific configuration. See `.env.example` for the full template.
 
 ```env
-# Example environment variables
-NEXT_PUBLIC_SITE_URL=https://datasourceinc.com
-NEXT_PUBLIC_GA_ID=your-google-analytics-id
+NEXT_PUBLIC_SITE_URL=http://localhost:3000
+PAYLOAD_PUBLIC_APP_URL=http://localhost:3000
+PAYLOAD_SECRET=replace-with-long-random-secret
+NEXT_PRIVATE_DRAFT_SECRET=replace-with-long-random-secret
+DATABASE_URI=mongodb://localhost:27017/dsource-site
+CLOUDINARY_CLOUD_NAME=replace-me
+CLOUDINARY_API_KEY=replace-me
+CLOUDINARY_API_SECRET=replace-me
+CLOUDINARY_FOLDER=dsource-media
+```
+
+Useful CMS commands:
+
+```bash
+pnpm generate:types
+pnpm generate:importmap
+pnpm seed:admin
+pnpm seed:insights
 ```
 
 ## Performance Targets

@@ -11,6 +11,7 @@ const NAV_LINKS = [
   { href: "/why-abis", label: "Why ABIS" },
   { href: "/customers", label: "Customers" },
   { href: "/#ps-insights", label: "PS Insights" },
+  { href: "/blog", label: "Blog" },
   { href: "/contact", label: "Contact Us" },
 ] as const;
 

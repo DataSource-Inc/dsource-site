@@ -1,32 +1,18 @@
 import Image from "next/image";
 import InsightCard from "@/components/ui/InsightCard";
+import { getCachedInsights } from "@/lib/payload/cache";
+import { getMediaURL } from "@/lib/payload/media";
 
-const INSIGHTS = [
-  {
-    title:
-      "Breaking down how Trusted Workforce will improve productivity for Personnel Security offices",
-    slug: "trusted-workforce-productivity",
-    icon: "/insights/icon-1.svg",
-  },
-  {
-    title:
-      "How Personnel Security is at the hub of key operational processes for Federal Agencies",
-    slug: "personnel-security-hub",
-    icon: "/insights/icon-2.svg",
-  },
-  {
-    title: "The benefits of Integration",
-    slug: "benefits-of-integration",
-    icon: "/insights/icon-3.svg",
-  },
-  {
-    title: "How Personnel Security is always evolving",
-    slug: "personnel-security-evolving",
-    icon: "/insights/icon-4.svg",
-  },
-] as const;
+const FALLBACK_ICONS = [
+  "/insights/icon-1.svg",
+  "/insights/icon-2.svg",
+  "/insights/icon-3.svg",
+  "/insights/icon-4.svg",
+];
 
-export default function InsightsSection() {
+export default async function InsightsSection() {
+  const insights = await getCachedInsights();
+
   return (
     <section id="ps-insights" className=" scroll-mt-24 py-24 max-md:py-16">
       <div className="mx-auto max-w-[1200px] px-10 max-md:px-4">
@@ -79,12 +65,12 @@ export default function InsightsSection() {
 
         {/* Insight cards grid */}
         <div className="mt-16 grid grid-cols-4 gap-3 max-md:grid-cols-1 max-md:gap-3">
-          {INSIGHTS.map((insight) => (
+          {insights.map((insight, index) => (
             <InsightCard
               key={insight.slug}
               title={insight.title}
               slug={insight.slug}
-              icon={insight.icon}
+              icon={getMediaURL(insight.cardIcon, "card") || FALLBACK_ICONS[index % FALLBACK_ICONS.length]}
               horizontalOnMobile
             />
           ))}
