@@ -23,16 +23,19 @@ export default async function BlogPage() {
   return (
     <section className="bg-light">
       <div className="mx-auto max-w-[1200px] px-10 pb-20 pt-14 max-md:px-4 max-md:pb-14 max-md:pt-10">
-        <div className="max-w-[760px]">
-          <h1 className="flex items-center gap-4 text-h2 text-primary-80 max-md:text-[36px] max-md:leading-[1.2]">
-            <span
+        <div className="max-w-full">
+          <div className="flex items-center gap-7 max-md:gap-4">
+            <h1 className="text-h1 text-primary-80 tracking-[-1.28px] max-md:text-[32px] max-md:leading-[1.2]">
+              News
+            </h1>
+            <div
               aria-label="News discussion"
               role="img"
-              className="flex size-12 shrink-0 items-center justify-center rounded-full bg-primary-10 text-primary-80 max-md:size-10"
+              className="flex size-24 shrink-0 items-center justify-center rounded-full bg-primary-10 text-primary-80 max-md:size-20"
             >
               <svg
                 aria-hidden="true"
-                className="size-7 max-md:size-6"
+                className="size-14 max-md:size-11"
                 fill="none"
                 viewBox="0 0 32 32"
                 xmlns="http://www.w3.org/2000/svg"
@@ -51,12 +54,11 @@ export default async function BlogPage() {
                   strokeWidth="2.25"
                 />
               </svg>
-            </span>
-            News
-          </h1>
-          <p className="mt-6 text-h5 leading-[1.45] text-primary-80 max-md:text-big">
+            </div>
+          </div>
+          <p className="mt-8 text-h3 text-primary-80 tracking-[-0.8px] max-md:text-[28px] max-md:leading-[1.25]">
             <span className="block">What&apos;s Happening In:</span>
-            <span className="mt-2 block">
+            <span className="mt-2 block whitespace-nowrap max-md:whitespace-normal">
               Personnel Security Operations, Federal Workforce Technology, and
             </span>
             <span className="block">
