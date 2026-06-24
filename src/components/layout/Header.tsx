@@ -36,7 +36,7 @@ export default function Header() {
           </Link>
 
           {/* Desktop Nav */}
-          <nav aria-label="Primary" className="hidden items-center gap-14 md:flex">
+          <nav aria-label="Primary" className="hidden items-center gap-14 lg:flex">
             {NAV_LINKS.map(({ href, label }) => {
               const isActive =
                 href === "/" ? pathname === "/" : pathname.startsWith(href);
@@ -60,7 +60,7 @@ export default function Header() {
           {/* Mobile Hamburger */}
           <button
             type="button"
-            className="flex items-center justify-center md:hidden"
+            className="flex items-center justify-center lg:hidden"
             onClick={() => setMobileMenuOpen(true)}
             aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
             aria-expanded={mobileMenuOpen}

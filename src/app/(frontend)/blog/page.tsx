@@ -21,8 +21,8 @@ export default async function BlogPage() {
   const posts = await getCachedBlogPosts();
 
   return (
-    <section className="bg-light">
-      <div className="mx-auto max-w-[1200px] px-10 pb-20 pt-14 max-md:px-4 max-md:pb-14 max-md:pt-10">
+    <section>
+      <div className="mx-auto max-w-[1200px] px-10 pb-14 pt-14 max-md:px-4 max-md:pb-10 max-md:pt-10">
         <div className="max-w-full">
           <div className="flex items-center gap-7 max-md:gap-4">
             <h1 className="text-h1 text-primary-80 tracking-[-1.28px] max-md:text-[32px] max-md:leading-[1.2]">
@@ -58,7 +58,7 @@ export default async function BlogPage() {
           </div>
           <p className="mt-8 text-h3 text-primary-80 tracking-[-0.8px] max-md:text-[28px] max-md:leading-[1.25]">
             <span className="block">What&apos;s Happening In:</span>
-            <span className="mt-2 block whitespace-nowrap max-md:whitespace-normal">
+            <span className="mt-2 block">
               Personnel Security Operations, Federal Workforce Technology, and
             </span>
             <span className="block">
@@ -66,31 +66,35 @@ export default async function BlogPage() {
             </span>
           </p>
         </div>
+      </div>
 
-        <div className="mt-14 divide-y divide-gray-40/70 border-y border-gray-40/70">
-          {posts.length > 0 ? (
-            posts.map((post) => (
-              <article
-                key={post.slug}
-                className="grid grid-cols-[180px_1fr_auto] items-center gap-8 py-8 max-md:grid-cols-1 max-md:gap-3"
-              >
-                <time className="text-body-2 text-gray-80">
-                  {formatDate(post.publishedAt)}
-                </time>
-                <h2 className="text-big text-primary-80">{post.title}</h2>
-                <Link
-                  href={`/blog/${post.slug}`}
-                  className="inline-flex justify-self-end rounded-lg bg-primary-80 px-5 py-3 text-body-1 font-semibold text-white transition-colors hover:bg-primary-100 max-md:justify-self-start"
+      <div className="bg-light">
+        <div className="mx-auto max-w-[1200px] px-10 pb-20 pt-12 max-md:px-4 max-md:pb-14 max-md:pt-8">
+          <div className="divide-y divide-gray-40/70 border-y border-gray-40/70">
+            {posts.length > 0 ? (
+              posts.map((post) => (
+                <article
+                  key={post.slug}
+                  className="grid grid-cols-[180px_1fr_auto] items-center gap-8 py-8 max-md:grid-cols-1 max-md:gap-3"
                 >
-                  Read more
-                </Link>
-              </article>
-            ))
-          ) : (
-            <p className="py-8 text-body-1 text-gray-100">
-              No news posts have been published yet.
-            </p>
-          )}
+                  <time className="text-body-2 text-gray-80">
+                    {formatDate(post.publishedAt)}
+                  </time>
+                  <h2 className="text-big text-black">{post.title}</h2>
+                  <Link
+                    href={`/blog/${post.slug}`}
+                    className="inline-flex justify-self-end rounded-lg bg-primary-80 px-5 py-3 text-body-1 font-semibold text-white transition-colors hover:bg-primary-100 max-md:justify-self-start"
+                  >
+                    Read more
+                  </Link>
+                </article>
+              ))
+            ) : (
+              <p className="py-8 text-body-1 text-gray-100">
+                No news posts have been published yet.
+              </p>
+            )}
+          </div>
         </div>
       </div>
     </section>
