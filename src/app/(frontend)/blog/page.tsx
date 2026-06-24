@@ -59,17 +59,19 @@ export default async function BlogPage() {
           <p className="mt-8 text-h3 text-primary-80 tracking-[-0.8px] max-md:text-[28px] max-md:leading-[1.25]">
             <span className="block">What&apos;s Happening In:</span>
             <span className="mt-2 block">
-              Personnel Security Operations, Federal Workforce Technology, and
-            </span>
-            <span className="block">
-              The Systems that keep Agencies Running Smoothly...
+              Personnel Security Operations, Federal Workforce{" "}
+              {/* <span className="whitespace-nowrap"> */}
+                Technology, and Systems that keep Agencies Running Smoothly...
+                {/* </span> */}
+            {/* </span> */}
+            {/* <span className="block"> */}
             </span>
           </p>
         </div>
       </div>
 
-      <div className="bg-light">
-        <div className="mx-auto max-w-[1200px] px-10 pb-20 pt-12 max-md:px-4 max-md:pb-14 max-md:pt-8">
+      <div className="mx-auto max-w-[1200px] px-10 pb-20 max-md:px-4 max-md:pb-14">
+        <div className="rounded-lg bg-light px-8 py-12 max-md:px-4 max-md:py-8">
           <div className="divide-y divide-gray-40/70 border-y border-gray-40/70">
             {posts.length > 0 ? (
               posts.map((post) => (
