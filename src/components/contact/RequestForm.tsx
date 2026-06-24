@@ -5,7 +5,7 @@ import Button from "@/components/ui/Button";
 import {
   submitContactForm,
   type ContactFormState,
-} from "@/app/contact/actions";
+} from "@/app/(frontend)/contact/actions";
 
 const TABS = ["Demo", "More Information", "White Paper"] as const;
 type Tab = (typeof TABS)[number];

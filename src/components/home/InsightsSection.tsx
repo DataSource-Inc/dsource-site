@@ -64,7 +64,8 @@ export default function InsightsSection() {
               {/* Avatar placeholder */}
               <div className="h-10 w-10 shrink-0 rounded-full bg-gray-40 overflow-hidden">
                 <Image
-                  src="/pam.png"               alt="Pamela Hopkins"
+                  src="/pam.png"
+                  alt="Pamela Hopkins"
                   width={40}
                   height={40}
                   className="h-full w-full object-cover"

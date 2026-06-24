@@ -1,13 +1,18 @@
 import type { MetadataRoute } from "next";
+
 import { insights } from "@/data/insights";
+import { fetchPublishedBlogPosts } from "@/lib/payload/queries";
 
 const BASE_URL = "https://www.datasourceinc.com";
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  const blogPosts = await fetchPublishedBlogPosts();
+
   const staticRoutes: MetadataRoute.Sitemap = [
     "",
     "/why-abis",
     "/customers",
+    "/blog",
     "/contact",
     "/privacy-policy",
   ].map((path) => ({
@@ -20,5 +25,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
     lastModified: new Date(),
   }));
 
-  return [...staticRoutes, ...insightRoutes];
+  const blogRoutes: MetadataRoute.Sitemap = blogPosts.map((post) => ({
+    url: `${BASE_URL}/blog/${post.slug}`,
+    lastModified: new Date(post.updatedAt),
+  }));
+
+  return [...staticRoutes, ...insightRoutes, ...blogRoutes];
 }

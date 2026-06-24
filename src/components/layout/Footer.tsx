@@ -6,6 +6,7 @@ const NAV_LINKS = [
   { href: "/why-abis", label: "Why ABIS" },
   { href: "/customers", label: "Customers" },
   { href: "/#ps-insights", label: "PS Insights" },
+  { href: "/blog", label: "News" },
   { href: "/contact", label: "Contact Us" },
   { href: "/privacy-policy", label: "Privacy Policy" },
 ] as const;
@@ -84,6 +85,12 @@ export default function Footer() {
               className="text-body-1 leading-[1.4] text-gray-100 hover:text-primary-80"
             >
               PS Insights
+            </Link>
+            <Link
+              href="/blog"
+              className="text-body-1 leading-[1.4] text-gray-100 hover:text-primary-80"
+            >
+              News
             </Link>
             <Link
               href="/contact"

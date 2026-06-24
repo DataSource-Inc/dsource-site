@@ -4,7 +4,7 @@ import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import ScrollToTop from "@/components/ScrollToTop";
 import { organizationSchema, websiteSchema, jsonLd } from "@/lib/structured-data";
-import "./globals.css";
+import "../globals.css";
 
 const SITE_TITLE = "ABIS Personnel Security Software | DataSource Inc.";
 const SITE_DESCRIPTION =

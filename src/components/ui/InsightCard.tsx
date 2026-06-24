@@ -14,7 +14,7 @@ export default function InsightCard({
   icon,
   horizontalOnMobile = false,
 }: InsightCardProps) {
-  // Derive hover icon path: /insights/icon-1.svg → /insights/hover/icon-1.svg
+  // Derive hover icon path: /insights/icon-1.svg -> /insights/hover/icon-1.svg
   const hoverIcon = icon.replace("/insights/", "/insights/hover/");
 
   return (
