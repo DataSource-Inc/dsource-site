@@ -6,6 +6,6 @@ export default function robots(): MetadataRoute.Robots {
       userAgent: "*",
       allow: "/",
     },
-    sitemap: "https://datasourceinc.com/sitemap.xml",
+    sitemap: "https://www.datasourceinc.com/sitemap.xml",
   };
 }

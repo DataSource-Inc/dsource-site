@@ -12,7 +12,7 @@ export const metadata: Metadata = {
     title: "Why ABIS: Federal Personnel Security Software | DataSource",
     description:
       "ABIS automates Federal Personnel Security workflows — background investigations, Continuous Vetting, adjudication, and Trusted Workforce 2.0 — built on 20+ years of PS expertise.",
-    url: "https://datasourceinc.com/why-abis",
+    url: "https://www.datasourceinc.com/why-abis",
   },
 };
 

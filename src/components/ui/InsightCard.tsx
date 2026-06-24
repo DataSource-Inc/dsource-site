@@ -49,7 +49,7 @@ export default function InsightCard({
       </div>
 
       {/* Title */}
-      <h3 className="text-big text-primary-80 transition-colors duration-300 group-hover:text-white">
+      <h3 className="text-big text-primary-100 transition-colors duration-300 group-hover:text-white">
         {title}
       </h3>
     </Link>

@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useCallback, useRef } from 'react';
 import Image from 'next/image';
-import { motion, AnimatePresence } from 'framer-motion';
+import { LazyMotion, domAnimation, m, AnimatePresence } from 'framer-motion';
 import { Customer } from '@/data/customers';
 
 interface CustomerCyclerProps {
@@ -189,9 +189,10 @@ export default function CustomerCycler({ customers }: CustomerCyclerProps) {
   // Mobile: simple fade transition, no book flip
   if (isMobile) {
     return (
+      <LazyMotion features={domAnimation} strict>
       <div className="w-full flex flex-col">
         <AnimatePresence mode="wait">
-          <motion.div
+          <m.div
             key={displayedIndex}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -222,16 +223,18 @@ export default function CustomerCycler({ customers }: CustomerCyclerProps) {
                 {current.about}
               </div>
             </div>
-          </motion.div>
+          </m.div>
         </AnimatePresence>
 
         {navigationControls}
       </div>
+      </LazyMotion>
     );
   }
 
   // Desktop: book-flip animation
   return (
+    <LazyMotion features={domAnimation} strict>
     <div className="w-full flex flex-col">
       {/* Book area */}
       <div
@@ -279,7 +282,7 @@ export default function CustomerCycler({ customers }: CustomerCyclerProps) {
             </div>
 
             {/* The turning page — positioned on right half, hinges on its left edge (the spine) */}
-            <motion.div
+            <m.div
               className="absolute top-0 right-0 w-1/2 h-full z-[3]"
               style={{
                 transformStyle: 'preserve-3d',
@@ -324,7 +327,7 @@ export default function CustomerCycler({ customers }: CustomerCyclerProps) {
                   </div>
                 </div>
               </div>
-            </motion.div>
+            </m.div>
           </>
         )}
 
@@ -351,7 +354,7 @@ export default function CustomerCycler({ customers }: CustomerCyclerProps) {
             </div>
 
             {/* The turning page — positioned on left half, hinges on its right edge (the spine) */}
-            <motion.div
+            <m.div
               className="absolute top-0 left-0 w-1/2 h-full z-[3]"
               style={{
                 transformStyle: 'preserve-3d',
@@ -396,12 +399,13 @@ export default function CustomerCycler({ customers }: CustomerCyclerProps) {
                   {target.about}
                 </div>
               </div>
-            </motion.div>
+            </m.div>
           </>
         )}
       </div>
 
       {navigationControls}
     </div>
+    </LazyMotion>
   );
 }

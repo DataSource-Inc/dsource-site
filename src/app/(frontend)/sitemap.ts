@@ -3,7 +3,7 @@ import type { MetadataRoute } from "next";
 import { insights } from "@/data/insights";
 import { fetchPublishedBlogPosts } from "@/lib/payload/queries";
 
-const BASE_URL = "https://datasourceinc.com";
+const BASE_URL = "https://www.datasourceinc.com";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const blogPosts = await fetchPublishedBlogPosts();

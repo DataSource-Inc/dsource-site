@@ -1,0 +1,23 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(grep -i -o -E '\\(\"[^\"]{0,200}\\(image|polyfill|next-gen|webp|avif|core-js|legacy\\)[^\"]{0,200}\"\\)' \"C:\\\\Users\\\\KyleJackson_pt5xowa\\\\Downloads\\\\PageSpeed Insights.html\")",
+      "Bash(grep -i -o -E '\"[^\"]{0,200}\\(transpile|baseline|Array\\\\.prototype|String\\\\.prototype|Object\\\\.fromEntries|@babel|browserslist\\)[^\"]{0,200}\"' \"C:\\\\Users\\\\KyleJackson_pt5xowa\\\\Downloads\\\\PageSpeed Insights.html\")",
+      "Bash(node -e \"console.log\\(require\\('sharp'\\)?'sharp ok':'no'\\)\")",
+      "Bash(identify \"C:\\\\Projects\\\\dsource-site\\\\public\\\\hero-dots.png\")",
+      "Bash(node -e ' *)",
+      "Bash(npm run *)",
+      "Bash(grep -i -o -E '\"[^\"]{0,100}\\(unused-css|unminified|render-blocking|css\\)[^\"]{0,200}\"' \"C:\\\\Users\\\\KyleJackson_pt5xowa\\\\Downloads\\\\PageSpeed Insights.html\")",
+      "Bash(grep -i -o -E '\"[^\"]{0,200}\\(b6f2282|\\\\.css[^\"]{0,5}\\\\?|wastedBytes|totalBytes\\)[^\"]{0,200}\"' \"C:\\\\Users\\\\KyleJackson_pt5xowa\\\\Downloads\\\\PageSpeed Insights.html\")",
+      "Bash(grep -i -o -E '\\(unused-css-rules.{0,3000}\\)' \"C:\\\\Users\\\\KyleJackson_pt5xowa\\\\Downloads\\\\PageSpeed Insights.html\")",
+      "Bash(grep -o -E '\\(wastedBytes|totalBytes|wastedPercent\\)[^,}]{0,30}')",
+      "Bash(grep -n \"priority\\\\|m\\\\\\\\.\\\\|LazyMotion\\\\|domAnimation\" src/components/home/HeroSection3.tsx)",
+      "Bash(rm -rf .next)",
+      "Bash(npx next *)",
+      "Bash(xargs sed *)",
+      "Bash(xargs grep *)",
+      "Bash(npm start *)",
+      "Bash(curl -s -o /dev/null -w \"HTTP %{http_code}  %{time_total}s\\\\n\" http://localhost:3000/)"
+    ]
+  }
+}

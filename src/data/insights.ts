@@ -9,6 +9,8 @@ export interface Insight {
   slug: string;
   icon: string;
   excerpt: string;
+  datePublished: string;
+  dateModified?: string;
   sections: InsightSection[];
 }
 
@@ -18,6 +20,7 @@ export const insights: Insight[] = [
       "Breaking down how Trusted Workforce will improve productivity for Personnel Security offices",
     slug: "trusted-workforce-productivity",
     icon: "/insights/icon-1.svg",
+    datePublished: "2026-05-05",
     excerpt:
       "Getting rid of periodic reinvestigations is a clearly huge time savings for Personnel Security offices \u2013 and besides, the long time period between investigations was just too long and really ineffective for ensuring the suitability of the federal workforce on a continual basis.",
     sections: [
@@ -44,6 +47,7 @@ export const insights: Insight[] = [
       "How Personnel Security is at the hub of key operational processes for Federal Agencies",
     slug: "personnel-security-hub",
     icon: "/insights/icon-2.svg",
+    datePublished: "2026-05-05",
     excerpt:
       "Personnel Security is a fundamental component of both Human Resources/Human Capital and Security. It has to spring into action for hiring, terminations, new contracts, and reports of financial issues, arrests, or other concerns.",
     sections: [
@@ -73,6 +77,7 @@ export const insights: Insight[] = [
     title: "The benefits of Integration",
     slug: "benefits-of-integration",
     icon: "/insights/icon-3.svg",
+    datePublished: "2026-05-05",
     excerpt:
       "The degree to which your background investigation/clearance case management application is integrated with HR and Security systems greatly impacts the agency\u2019s ability to function like a well-oiled machine.",
     sections: [
@@ -90,6 +95,7 @@ export const insights: Insight[] = [
     title: "How Personnel Security is always evolving",
     slug: "personnel-security-evolving",
     icon: "/insights/icon-4.svg",
+    datePublished: "2026-05-05",
     excerpt:
       "We\u2019ve been in Personnel Security for 25 years and have seen how it is always changing and evolving, from paper forms to eQIP, eDelivery, ODNI metrics reporting, and now Trusted Workforce.",
     sections: [

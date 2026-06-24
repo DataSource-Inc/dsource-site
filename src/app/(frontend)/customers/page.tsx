@@ -11,7 +11,7 @@ export const metadata: Metadata = {
     title: "Federal Agencies Using ABIS | DataSource Inc.",
     description:
       "Federal agencies — IRS, SBA, USITC, CFPB, FRB, LOC, GSA and more — rely on DataSource's ABIS platform to run Personnel Security and background investigation workflows.",
-    url: "https://datasourceinc.com/customers",
+    url: "https://www.datasourceinc.com/customers",
   },
 };
 
