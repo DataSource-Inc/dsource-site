@@ -3,11 +3,12 @@ import { describe, expect, it } from "vitest";
 import { BlogPosts } from "./BlogPosts";
 
 describe("BlogPosts collection", () => {
+  const getField = (name: string) =>
+    BlogPosts.fields.find((field) => "name" in field && field.name === name);
+
   it("does not require editorial summary fields for news posts", () => {
     const fieldNames = BlogPosts.fields.map((field) => "name" in field ? field.name : "");
-    const featuredImage = BlogPosts.fields.find(
-      (field) => "name" in field && field.name === "featuredImage",
-    );
+    const featuredImage = getField("featuredImage");
 
     expect(fieldNames).not.toContain("excerpt");
     expect(featuredImage).toMatchObject({ name: "featuredImage" });
@@ -19,12 +20,8 @@ describe("BlogPosts collection", () => {
   });
 
   it("lets editors choose preset or custom featured image display sizes", () => {
-    const featuredImageSize = BlogPosts.fields.find(
-      (field) => "name" in field && field.name === "featuredImageSize",
-    );
-    const featuredImageMaxWidth = BlogPosts.fields.find(
-      (field) => "name" in field && field.name === "featuredImageMaxWidth",
-    );
+    const featuredImageSize = getField("featuredImageSize");
+    const featuredImageMaxWidth = getField("featuredImageMaxWidth");
 
     expect(featuredImageSize).toMatchObject({
       defaultValue: "wide",
@@ -49,9 +46,29 @@ describe("BlogPosts collection", () => {
         description: "Maximum display width in pixels. Used only when Featured image size is Custom.",
       },
       max: 1200,
-      min: 320,
+      min: 50,
       name: "featuredImageMaxWidth",
       type: "number",
     });
+  });
+
+  it("accepts numeric string custom featured image widths from Payload form data", async () => {
+    const featuredImageMaxWidth = getField("featuredImageMaxWidth");
+    const validate =
+      featuredImageMaxWidth &&
+      "validate" in featuredImageMaxWidth &&
+      featuredImageMaxWidth.validate;
+
+    if (typeof validate !== "function") {
+      throw new Error("Expected featuredImageMaxWidth to have a validator.");
+    }
+
+    const result = await Promise.resolve(
+      validate("50", {
+        siblingData: { featuredImageSize: "custom" },
+      } as never),
+    );
+
+    expect(result).toBe(true);
   });
 });
