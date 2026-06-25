@@ -293,6 +293,14 @@ export interface BlogPost {
     [k: string]: unknown;
   };
   featuredImage?: (string | null) | Media;
+  /**
+   * Controls how wide the featured image appears on the blog post page.
+   */
+  featuredImageSize?: ('wide' | 'standard' | 'compact' | 'custom') | null;
+  /**
+   * Maximum display width in pixels. Used only when Featured image size is Custom.
+   */
+  featuredImageMaxWidth?: number | null;
   authors?: (string | User)[] | null;
   category?: (string | null) | Category;
   publishedAt: string;
@@ -508,6 +516,8 @@ export interface BlogPostsSelect<T extends boolean = true> {
   slug?: T;
   content?: T;
   featuredImage?: T;
+  featuredImageSize?: T;
+  featuredImageMaxWidth?: T;
   authors?: T;
   category?: T;
   publishedAt?: T;

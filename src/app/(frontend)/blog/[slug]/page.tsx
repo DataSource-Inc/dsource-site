@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 
 import ArticleBody from "@/components/cms/ArticleBody";
 import CMSImage from "@/components/cms/CMSImage";
+import { getFeaturedImageDisplay } from "@/lib/blog/featuredImage";
 import {
   getCachedBlogPost,
   getCachedBlogPosts,
@@ -71,6 +72,11 @@ export default async function BlogPostPage({
 
   if (!post) notFound();
 
+  const featuredImageDisplay = getFeaturedImageDisplay(
+    post.featuredImageSize,
+    post.featuredImageMaxWidth,
+  );
+
   return (
     <section className="bg-light">
       <article className="mx-auto max-w-[1200px] px-10 pb-20 pt-14 max-md:px-4 max-md:pb-14 max-md:pt-10">
@@ -84,12 +90,15 @@ export default async function BlogPostPage({
         </div>
 
         {post.featuredImage && typeof post.featuredImage !== "string" && (
-          <div className="mx-auto mt-12 max-w-[920px] overflow-hidden rounded-lg bg-beige">
+          <div
+            className={featuredImageDisplay.className}
+            style={featuredImageDisplay.style}
+          >
             <CMSImage
               className="h-auto w-full"
               media={post.featuredImage}
               priority
-              size="hero"
+              size={featuredImageDisplay.imageSize}
             />
           </div>
         )}

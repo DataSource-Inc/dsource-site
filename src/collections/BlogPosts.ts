@@ -1,4 +1,4 @@
-import type { CollectionConfig } from "payload";
+import type { CollectionConfig, NumberFieldValidation } from "payload";
 
 import { isAdmin } from "@/access/isAdmin";
 import { publishedOnly } from "@/access/publishedOnly";
@@ -6,6 +6,17 @@ import { richTextField } from "@/fields/richText";
 import { slugField } from "@/fields/slug";
 import { revalidateBlogPost } from "@/lib/payload/revalidate";
 import { formatPreviewURL } from "@/utilities/formatPreviewURL";
+
+const validateFeaturedImageMaxWidth: NumberFieldValidation = (
+  value,
+  { siblingData },
+) => {
+  const blogPostData = siblingData as { featuredImageSize?: unknown };
+  if (blogPostData.featuredImageSize !== "custom") return true;
+  return typeof value === "number"
+    ? true
+    : "Enter a custom featured image max width.";
+};
 
 export const BlogPosts: CollectionConfig = {
   slug: "blog-posts",
@@ -26,6 +37,8 @@ export const BlogPosts: CollectionConfig = {
   defaultPopulate: {
     category: true,
     featuredImage: true,
+    featuredImageMaxWidth: true,
+    featuredImageSize: true,
     publishedAt: true,
     slug: true,
     title: true,
@@ -42,6 +55,45 @@ export const BlogPosts: CollectionConfig = {
       name: "featuredImage",
       type: "upload",
       relationTo: "media",
+    },
+    {
+      name: "featuredImageSize",
+      type: "select",
+      admin: {
+        description: "Controls how wide the featured image appears on the blog post page.",
+      },
+      defaultValue: "wide",
+      options: [
+        {
+          label: "Wide",
+          value: "wide",
+        },
+        {
+          label: "Standard",
+          value: "standard",
+        },
+        {
+          label: "Compact",
+          value: "compact",
+        },
+        {
+          label: "Custom",
+          value: "custom",
+        },
+      ],
+    },
+    {
+      name: "featuredImageMaxWidth",
+      type: "number",
+      admin: {
+        condition: (_, siblingData) =>
+          siblingData?.featuredImageSize === "custom",
+        description:
+          "Maximum display width in pixels. Used only when Featured image size is Custom.",
+      },
+      max: 1200,
+      min: 320,
+      validate: validateFeaturedImageMaxWidth,
     },
     {
       name: "authors",
