@@ -31,16 +31,16 @@ describe("getFeaturedImageDisplay", () => {
   });
 
   it("uses numeric string custom widths from Payload form values", () => {
-    expect(getFeaturedImageDisplay("custom", "680")).toEqual({
+    expect(getFeaturedImageDisplay("custom", "50")).toEqual({
       className: "mx-auto mt-12 w-full overflow-hidden rounded-lg bg-beige",
       imageSize: "hero",
-      style: { maxWidth: "680px" },
+      style: { maxWidth: "50px" },
     });
   });
 
   it("falls back to the wide treatment when a custom width is missing or invalid", () => {
     expect(getFeaturedImageDisplay("custom")).toEqual(getFeaturedImageDisplay("wide"));
-    expect(getFeaturedImageDisplay("custom", 200)).toEqual(getFeaturedImageDisplay("wide"));
-    expect(getFeaturedImageDisplay("custom", 1300)).toEqual(getFeaturedImageDisplay("wide"));
+    expect(getFeaturedImageDisplay("custom", 49)).toEqual(getFeaturedImageDisplay("wide"));
+    expect(getFeaturedImageDisplay("custom", 1201)).toEqual(getFeaturedImageDisplay("wide"));
   });
 });

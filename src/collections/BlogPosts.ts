@@ -13,7 +13,14 @@ const validateFeaturedImageMaxWidth: NumberFieldValidation = (
 ) => {
   const blogPostData = siblingData as { featuredImageSize?: unknown };
   if (blogPostData.featuredImageSize !== "custom") return true;
-  return typeof value === "number"
+
+  const parsedValue = Number(value);
+  return value !== null &&
+    value !== undefined &&
+    String(value).trim() !== "" &&
+    Number.isFinite(parsedValue) &&
+    parsedValue >= 50 &&
+    parsedValue <= 1200
     ? true
     : "Enter a custom featured image max width.";
 };
@@ -92,7 +99,7 @@ export const BlogPosts: CollectionConfig = {
           "Maximum display width in pixels. Used only when Featured image size is Custom.",
       },
       max: 1200,
-      min: 320,
+      min: 50,
       validate: validateFeaturedImageMaxWidth,
     },
     {

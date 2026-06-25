@@ -38,7 +38,7 @@ function normalizeCustomWidth(width?: CustomMaxWidth) {
 
   if (
     !Number.isFinite(parsedWidth) ||
-    parsedWidth < 320 ||
+    parsedWidth < 50 ||
     parsedWidth > 1200
   ) {
     return null;
