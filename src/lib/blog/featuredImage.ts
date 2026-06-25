@@ -30,26 +30,35 @@ const featuredImageDisplays = {
   },
 } satisfies Record<Exclude<FeaturedImageSize, "custom">, FeaturedImageDisplay>;
 
-function isValidCustomWidth(width?: number | null) {
-  return (
-    typeof width === "number" &&
-    Number.isFinite(width) &&
-    width >= 320 &&
-    width <= 1200
-  );
+type CustomMaxWidth = number | string | null | undefined;
+
+function normalizeCustomWidth(width?: CustomMaxWidth) {
+  if (typeof width === "string" && width.trim() === "") return null;
+  const parsedWidth = Number(width);
+
+  if (
+    !Number.isFinite(parsedWidth) ||
+    parsedWidth < 320 ||
+    parsedWidth > 1200
+  ) {
+    return null;
+  }
+
+  return parsedWidth;
 }
 
 export function getFeaturedImageDisplay(
   size: FeaturedImageSize | null | undefined = "wide",
-  customMaxWidth?: number | null,
+  customMaxWidth?: CustomMaxWidth,
 ): FeaturedImageDisplay {
   if (size === "custom") {
-    if (!isValidCustomWidth(customMaxWidth)) return featuredImageDisplays.wide;
+    const width = normalizeCustomWidth(customMaxWidth);
+    if (width === null) return featuredImageDisplays.wide;
 
     return {
       className: `${baseClassName} w-full overflow-hidden rounded-lg bg-beige`,
       imageSize: "hero",
-      style: { maxWidth: `${customMaxWidth}px` },
+      style: { maxWidth: `${width}px` },
     };
   }
 
