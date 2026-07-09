@@ -44,7 +44,7 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
   return (
     <div id="mobile-menu" role="dialog" aria-modal="true" aria-label="Mobile menu" className="fixed inset-0 z-[100] bg-beige">
       {/* Top bar: logo + close */}
-      <div className="flex items-center justify-between px-4 py-4">
+      <div className="flex h-20 items-center justify-between px-4">
         <Link href="/" onClick={onClose} className="relative shrink-0">
           <Image
             src="/dsource-logo2.png"
@@ -78,7 +78,7 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
       </div>
 
       {/* Nav Links */}
-      <nav aria-label="Mobile" className="flex flex-col gap-8 px-4 pt-52">
+      <nav aria-label="Mobile" className="flex flex-col gap-8 px-4 pt-8">
         {NAV_LINKS.map(({ href, label }) => (
           <Link
             key={href}
